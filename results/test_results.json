@@ -1,0 +1,47 @@
+{
+    "sections": [
+        {
+            "section_name": "Software Requirements Specification (SRS)\nNexaTest \u2013 SRS Analysis & Test Case Generation System",
+            "content": ""
+        },
+        {
+            "section_name": "1. Introduction",
+            "content": "1.1 Purpose The purpose of NexaTest is to automatically analyze Software Requirement Specification (SRS) documents, extract requirements, and generate structured test cases using an automated pipeline and API services. 1.2 Scope NexaTest allows users to upload SRS documents (PDF), extract text, segment sections, identify functional requirements, and generate suggested test cases. The system is designed for QA teams, interns, and analysts to accelerate requirement understanding and test design. 1.3 Definitions SRS \u2014 Software Requirements Specification API \u2014 Application Programming Interface FR \u2014 Functional Requirement NFR \u2014 Non\u2011Functional Requirement "
+        },
+        {
+            "section_name": "2. Overall Description",
+            "content": "2.1 Product Perspective NexaTest is a backend API-driven system built with FastAPI and Python. It processes SRS documents and produces structured outputs for testing workflows. 2.2 Product Functions Upload SRS PDF documents Extract text from SRS files Segment SRS into logical sections Extract functional requirements Store extracted artifacts Generate sample test cases Provide API endpoints for automation 2.3 User Classes QA Engineers Test Analysts Developers Interns and Researchers 2.4 Operating Environment Python 3.x FastAPI Pytest Local file storage Virtual environmental support "
+        },
+        {
+            "section_name": "3. System Features",
+            "content": "3.1 SRS Upload The system allows users to upload SRS documents via an API endpoint. 3.2 Text Extraction The system should extract readable text from uploaded PDF files. 3.3 Section Segmentation The system shall divide SRS text into structured sections such as Introduction, Functional Requirements, and Non\u2011Functional Requirements. 3.4 Requirement Extraction The system shall identify and extract functional requirements from the SRS content. 3.5 Test Case Generation The system shall generate sample test cases from extracted requirements. 3.6 API Access The system should provide REST API endpoints for upload, requirement retrieval, and test generation. "
+        },
+        {
+            "section_name": "4. Functional Requirements",
+            "content": "FR\u20111 The system shall accept SRS documents in PDF format. FR\u20112 The system shall store uploaded SRS files. FR\u20113 The system shall extract text from uploaded PDFs. FR\u20114 The system shall segment SRS sections automatically. FR\u20115 The system shall extract functional requirements. FR\u20116 The system shall return requirements via API. FR\u20117 The system shall generate test cases from requirements. FR\u20118 The system shall return test cases in JSON format. FR\u20119 The system shall support automated pytest validation endpoints. "
+        },
+        {
+            "section_name": "5. Non\u2011Functional Requirements",
+            "content": "NFR\u20111 The system should respond to API requests within 2 seconds for small SRS files. NFR\u20112 The system shall handle invalid file uploads safely. NFR\u20113 The system shall be modular and maintainable. NFR\u20114 The system shall support unit and API testing. NFR\u20115 The system should run in a virtual environment without conflicts. "
+        },
+        {
+            "section_name": "6. External Interface Requirements",
+            "content": "6.1 API Interface POST /upload-srs \u2014 Upload SRS file GET /requirements/{id} \u2014 Get extracted requirements POST /generate-tests/{id} \u2014 Generate test cases 6.2 File Interface PDF documents are accepted as input. "
+        },
+        {
+            "section_name": "7. Future Enhancements",
+            "content": "Database persistence ML-based requirement classification Advanced NLP extraction UI dashboard Test case export to Excel/Test tools "
+        }
+    ],
+    "requirements": [
+        "The system shall divide SRS text into structured sections such as Introduction, Functional Requirements, and Non\u2011Functional Requirements.",
+        "The system shall identify and extract functional requirements from the SRS content.",
+        "The system shall generate sample test cases from extracted requirements."
+    ],
+    "features": [],
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}
