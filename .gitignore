@@ -1,0 +1,19 @@
+# Python caches
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+
+# Database
+*.sqlite3
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Optional uploads/doc files if you don't want to push
+# uploads/
+# *.docx
+# *.pdf

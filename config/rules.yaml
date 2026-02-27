@@ -1,0 +1,20 @@
+cleaning:
+  stopwords:
+    - is
+    - a
+    - the
+    - and
+    - with
+rules:
+  - name: industry_terms
+    pattern: "(tech|software|hardware|cloud|ai)"
+    category: "technology"
+
+  - name: finance_terms
+    pattern: "(usd|dollar|million|billion|price)"
+    category: "finance"
+
+  - name: time_terms
+    pattern: "(year|month|day|week|today|yesterday)"
+    category: "temporal"
+

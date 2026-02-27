@@ -1,0 +1,13 @@
+streamlit
+numpy
+pandas
+scikit-learn
+gensim
+pyyaml
+psycopg2-binary
+sqlalchemy
+plotly
+matplotlib
+pytest
+chardet
+gensim

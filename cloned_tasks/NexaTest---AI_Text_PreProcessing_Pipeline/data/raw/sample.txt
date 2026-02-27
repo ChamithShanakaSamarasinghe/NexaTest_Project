@@ -1,0 +1,2 @@
+This is a simple test file for ingestion module.
+We are learning Docker, PostgreSQL, and NLP pipelines.

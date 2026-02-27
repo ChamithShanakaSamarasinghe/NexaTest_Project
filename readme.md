@@ -1,32 +1,58 @@
 # SRS Automation Project
 
-This project automates the extraction, storage, and analysis of Software Requirements Specification (SRS) documents. It provides a **Streamlit interface** to upload SRS files, stores extracted data in **SQLite**, and exposes a **FastAPI** backend to query sections, requirements, features, and test results.
+This project automates the extraction, analysis, and storage of **Software Requirements Specification (SRS)** documents. It combines a **Streamlit interface** for uploading SRS files with a **FastAPI backend** for querying structured data, powered by **AI/ML models** for keyword extraction, entity recognition, summarization, and feature-priority-risk (FPR) analysis. All data is stored in **SQLite**.
 
 ---
 
 ## Features
 
-1. **Streamlit App (`srs_app.py`)**
-   - Upload any `.docx` SRS document.
-   - Automatically extracts:
-     - Sections
-     - Requirements
-     - Features
-   - Saves data to SQLite database (`db.sqlite3`).
+### 1. **Streamlit App (`srs_app.py`)**
 
-2. **FastAPI App (`fastapi_app.py`)**
-   - Provides API endpoints to access:
-     - `/documents` – List all uploaded documents
-     - `/documents/{doc_id}/sections` – Get sections for a document
-     - `/documents/{doc_id}/requirements` – Get requirements
-     - `/documents/{doc_id}/features` – Get features
-     - `/documents/{doc_id}/test-results` – Get test results
-     - `/analytics/{doc_id}` – Test results summary (total, passed, failed)
-   - Swagger UI available at `http://127.0.0.1:8000/docs`.
+* Upload any `.docx` SRS document.
+* Automatically extracts:
 
-3. **SQLite Database**
-   - Stores documents, sections, requirements, features, and test results.
-   - Automatically updated when a new SRS is uploaded via Streamlit.
+  * Sections
+  * Requirements
+  * Features
+* Performs **AI-powered analysis**:
+
+  * Keyword extraction using **KeyBERT**
+  * Entity recognition
+  * Document summarization using **DistilBART**
+* Saves all extracted data to SQLite (`db.sqlite3`) and triggers FPR analysis.
+
+### 2. **FastAPI App (`fastapi_app.py`)**
+
+* Provides robust **API endpoints** for programmatic access:
+
+  * `/documents` – List all uploaded documents
+  * `/documents/{doc_id}/sections` – Get sections for a document
+  * `/documents/{doc_id}/requirements` – Get extracted requirements
+  * `/documents/{doc_id}/features` – Get features
+  * `/documents/{doc_id}/test-results` – Get automated test results
+  * `/documents/{doc_id}/fpr` – Get Feature-Priority-Risk (FPR) results including clusters, keywords, entities, and metrics
+  * `/analytics/{doc_id}` – Summary of test results (total, passed, failed)
+  * `/process-srs` – Process a new SRS file programmatically
+  * `/full-analysis` – Returns summary, keywords, entities, and parsed sections
+  * `/store-fpr/{doc_id}` – Store FPR clustering results into the database
+* **Swagger UI** available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+
+### 3. **SQLite Database**
+
+* Stores all documents, sections, requirements, features, test results, and FPR data.
+* Automatically updated when a new SRS is uploaded via Streamlit or processed via the API.
+
+### 4. **AI/ML Enhancements**
+
+* **Keyword Extraction** using KeyBERT (`all-MiniLM-L6-v2`)
+* **Summarization** with `sshleifer/distilbart-cnn-12-6`
+* **Entity Recognition** with spaCy/NLP pipeline
+* **FPR Analysis**:
+
+  * Clusters related features and requirements
+  * Assigns **priority** (High, Medium, Low)
+  * Identifies potential **risks** (Security, Performance, etc.)
+  * Generates **metrics** like silhouette score for cluster quality
 
 ---
 
@@ -37,52 +63,60 @@ This project automates the extraction, storage, and analysis of Software Require
 ```bash
 git clone <your-repo-url>
 cd SRS-NexaTest
+```
 
-Create and activate a virtual environment:
- python -m venv venv
- venv\Scripts\activate      # Windows
- # source venv/bin/activate  # macOS/Linux
+2. Create and activate a virtual environment:
 
-Install dependencies:
+```bash
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# macOS/Linux
+# source venv/bin/activate
+```
+
+3. Install dependencies:
+
+```bash
 pip install -r requirements.txt
+```
 
-Usage
-1. Run the Streamlit App
+---
+
+## Usage
+
+### 1. Run the Streamlit App
+
+```bash
 streamlit run src\srs_app.py
+```
 
-Upload SRS .docx files.
+* Upload SRS `.docx` files
+* Extracted sections, requirements, features, and FPR analysis are **automatically saved** to `db.sqlite3`.
 
-Extracted data is stored in db.sqlite3.
+### 2. Run the FastAPI App
 
-2. Run the FastAPI App
+```bash
 python -m uvicorn src.fastapi_app:app --reload
+```
 
-    Open Swagger UI at http://127.0.0.1:8000/docs.
-    Query documents, sections, requirements, features, test results, and analytics.
+* Open Swagger UI at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+* Programmatically query documents, sections, requirements, features, test results, analytics, and perform full analysis.
 
-# Folder Structure
-Folder Structure
-SRS-NexaTest/
-│
-├─ src/
-│   ├─ srs_app.py          # Streamlit app
-│   ├─ fastapi_app.py      # FastAPI app
-│   └─ extract_srs_data.py # Extract sections, requirements, features from SRS
-│
-├─ srs_docs/               # Upload folder for SRS documents
-├─ results/                # Test results JSON
-├─ db.sqlite3              # SQLite database
-├─ save_results.py         # Insert test results into DB
-├─ setup_db.py             # Create DB and tables
-├─ requirements.txt        # Python dependencies
-└─ README.md               # Project documentation
+---
 
-Notes
-#Make sure srs_docs/ folder exists for uploads.
-#Streamlit uploads automatically update the database, which is then served by FastAPI.
-#Use http://127.0.0.1:8000/docs to explore and test the API endpoints.
-#Python 3.13+ recommended.
 
-Task done by
-Chamith Shanaka Samarasinghe
+## Notes
+
+* Ensure `srs_docs/` exists for uploads.
+* Streamlit uploads automatically update the database, which is served by FastAPI.
+* Use [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs) to explore and test API endpoints.
+* Python **3.13+** recommended.
+* Works on **Windows, macOS, and Linux**.
+
+---
+
+## Author
+
+**Chamith Shanaka Samarasinghe**
 AI/ML & Data Science Intern

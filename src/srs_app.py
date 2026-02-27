@@ -1,13 +1,16 @@
 # File: srs_app.py
 import streamlit as st
 import os
-import shutil
 import json
 from docx import Document
 import sqlite3
 from datetime import datetime
 
-# --- Paths ---
+# 🔥 Import your AI modules
+from src.enhancer import PipelineEnhancer
+from src.fpr.fpr_pipeline import run_fpr_pipeline
+
+# Paths
 DB_FILE = "db.sqlite3"
 SRS_FOLDER = "srs_docs"
 RESULTS_FOLDER = "results"
@@ -15,8 +18,11 @@ RESULTS_FOLDER = "results"
 os.makedirs(SRS_FOLDER, exist_ok=True)
 os.makedirs(RESULTS_FOLDER, exist_ok=True)
 
-# --- Utility functions ---
-def insert_into_db(doc_filename, sections, requirements, features, test_results):
+# Initialize Enhancer
+enhancer = PipelineEnhancer()
+
+# Utility functions
+def insert_into_db(doc_filename, sections, requirements, features, test_results, fpr_result):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
 
@@ -52,12 +58,24 @@ def insert_into_db(doc_filename, sections, requirements, features, test_results)
             (doc_id, test_name, status),
         )
 
+    # 🔥 OPTIONAL: Store FPR summary (as JSON string)
+    cursor.execute(
+        "INSERT INTO fpr_results (document_id, clusters, keywords, metrics) VALUES (?, ?, ?, ?)",
+        (
+            doc_id,
+            json.dumps(fpr_result["clusters"]),
+            json.dumps(fpr_result["keywords"]),
+            json.dumps(fpr_result["metrics"]),
+        ),
+    )
+
     conn.commit()
     conn.close()
     return doc_id
 
-# --- Streamlit UI ---
-st.title("SRS Automation Platform")
+
+# Streamlit UI
+st.title("🚀 SRS Automation Platform (AI Powered)")
 
 uploaded_file = st.file_uploader("Upload your SRS (.docx) file", type=["docx"])
 
@@ -70,19 +88,23 @@ if uploaded_file:
     with open(srs_path, "wb") as f:
         f.write(uploaded_file.getbuffer())
 
-    st.success(f"SRS file saved: {srs_filename}")
+    st.success(f"✅ SRS file saved: {srs_filename}")
 
-    # --- Extract content ---
+    # Extract content
     doc = Document(srs_path)
     sections = []
     requirements = []
     features = []
     current_section = None
 
+    full_text = ""
+
     for para in doc.paragraphs:
         text = para.text.strip()
         if not text:
             continue
+
+        full_text += text + " "
 
         if para.style.name.startswith("Heading"):
             current_section = text
@@ -95,7 +117,17 @@ if uploaded_file:
             if "feature" in text.lower():
                 features.append(text)
 
-    # --- Dummy test results ---
+    # 🔥 RUN ENHANCER
+    enhanced = enhancer.enhance(full_text)
+    clean_text = enhanced["clean_text"]
+
+    # 🔥 RUN FEATURE PATTERN RECOGNITION
+    if requirements:
+        fpr_result = run_fpr_pipeline(requirements)
+    else:
+        fpr_result = {"clusters": [], "keywords": {}, "metrics": {}}
+
+    # Dummy test results
     test_results = {
         "test_requirement_extraction": "PASSED",
         "test_testcase_generation": "PASSED",
@@ -109,25 +141,46 @@ if uploaded_file:
             "sections": sections,
             "requirements": requirements,
             "features": features,
+            "clean_text": clean_text,
+            "fpr": fpr_result,
             "test_results": test_results
         }, f, indent=4)
 
-    # --- Insert into database ---
-    doc_id = insert_into_db(srs_filename, sections, requirements, features, test_results)
-    st.success(f"Data saved to database with doc_id {doc_id}")
+    # Insert into database
+    doc_id = insert_into_db(
+        srs_filename,
+        sections,
+        requirements,
+        features,
+        test_results,
+        fpr_result
+    )
 
-    # --- Display summary ---
-    st.subheader("Summary")
+    st.success(f"💾 Data saved to database with doc_id {doc_id}")
+
+    # Display summary
+    st.subheader("📊 Summary")
     st.write(f"Sections extracted: {len(sections)}")
     st.write(f"Requirements extracted: {len(requirements)}")
     st.write(f"Features extracted: {len(features)}")
-    st.write(f"Test results: {len(test_results)}")
 
-    # Optional: show first 3 sections and requirements
-    st.subheader("Sample Sections")
+    # 🔥 Show FPR Results
+    st.subheader("🧠 Feature Pattern Recognition")
+
+    st.write("Clusters:")
+    st.write(fpr_result["clusters"])
+
+    st.write("Keywords per Cluster:")
+    st.json(fpr_result["keywords"])
+
+    st.write("Metrics:")
+    st.json(fpr_result["metrics"])
+
+    # Sample Data
+    st.subheader("📄 Sample Sections")
     for sec in sections[:3]:
         st.markdown(f"**{sec['section_name']}**: {sec['content'][:200]}...")
 
-    st.subheader("Sample Requirements")
+    st.subheader("📌 Sample Requirements")
     for req in requirements[:5]:
         st.markdown(f"- {req}")
