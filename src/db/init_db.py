@@ -35,13 +35,19 @@ def init_database():
     """)
 
     # -------------------------------
-    # Table 3: Functional Requirements
+    # Table 3: Functional Requirements (UPDATED)
     # -------------------------------
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS requirements (
             requirement_id INTEGER PRIMARY KEY AUTOINCREMENT,
             section_id INTEGER NOT NULL,
             requirement_text TEXT NOT NULL,
+
+            -- ✅ Confidence Scoring Fields
+            confidence_score REAL,
+            confidence_band TEXT,
+            confidence_breakdown TEXT,
+
             FOREIGN KEY (section_id) REFERENCES sections(section_id)
         )
     """)
