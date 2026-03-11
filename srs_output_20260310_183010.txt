@@ -1,0 +1,17 @@
+{
+    "functional_requirements": [],
+    "non_functional_requirements": [],
+    "features": [
+        "aws services being used ........................................................................................................... 3",
+        "have a comparatively more affordable, scalable, and maintenance-free set of services as the cloud",
+        "in order to meet the module assignment brief's scenario 1 requirements.",
+        "architecture design, services used, process of implementation, problems encountered, testing, and a",
+        "aws services being used",
+        "relies on events was ideally matched with the system's features, which include high scalability, rapid",
+        "notification service (sns). these notifications were handled by the system using a topic named",
+        "primary level. one important precaution that stopped importmoduleerror from happening was the",
+        "degrees of component independence were incorporated into the system's architecture to provide",
+        "architecture established high levels of independence across its components. the project ran into",
+        "from this work. i developed aws service dependencies and learnt how to manage iam and deploy"
+    ]
+}

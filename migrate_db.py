@@ -10,20 +10,24 @@ if not os.path.exists(DB_PATH):
 conn = sqlite3.connect(DB_PATH)
 cursor = conn.cursor()
 
-# Add metrics column to fpr_results if missing
+# Checking columns
 cursor.execute("PRAGMA table_info(fpr_results)")
 columns = [col[1] for col in cursor.fetchall()]
-if "metrics" not in columns:
-    print("Adding 'metrics' column to fpr_results table...")
-    cursor.execute("ALTER TABLE fpr_results ADD COLUMN metrics TEXT DEFAULT '{}'")
-else:
-    print("'metrics' column already exists.")
 
-# Optional: print existing tables
+if "metrics" not in columns:
+    print("Adding 'metrics' column...")
+    cursor.execute("ALTER TABLE fpr_results ADD COLUMN metrics TEXT DEFAULT '{}'")
+
+else:
+    print("metrics column already exists")
+
+# Showing tables
 cursor.execute("SELECT name FROM sqlite_master WHERE type='table';")
 tables = cursor.fetchall()
-print("Tables in DB:", tables)
+
+print("Tables in database:", tables)
 
 conn.commit()
 conn.close()
-print("Migration complete ✅")
+
+print("Migration complete")

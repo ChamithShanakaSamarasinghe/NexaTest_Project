@@ -1,0 +1,51 @@
+{
+    "functional_requirements": [
+        "the system shall operate on linux-based servers and shall be accessible through modern web",
+        "the system shall allow users to register using a valid institutional email address.",
+        "the system shall authenticate users using encrypted credentials.",
+        "the system shall allow users to reset their passwords securely.",
+        "the system shall enforce role-based access control (rbac).",
+        "the system shall allow administrators to create student profiles.",
+        "the system shall allow administrators to update student personal and academic information.",
+        "the system shall allow administrators to delete student records when required.",
+        "the system shall persist student records in a centralized database.",
+        "the system shall allow lecturers to create and update course information.",
+        "the system shall allow administrators to assign lecturers to courses.",
+        "the system shall allow students to enrol in available courses.",
+        "the system shall allow lecturers to submit grades for enrolled students.",
+        "the system shall allow lecturers to update submitted grades before finalization.",
+        "the system shall calculate grade point averages automatically.",
+        "the system shall generate reports in pdf format.",
+        "the system shall notify students via email when grades are published.",
+        "the system shall log report generation activities for audit purposes.",
+        "the system shall respond to user requests within 2 seconds under normal operating",
+        "the system shall encrypt sensitive data at rest and in transit.",
+        "the system shall log all authentication and authorization attempts.",
+        "the system shall restrict access to system resources based on user roles.",
+        "the system shall provide a user-friendly interface.",
+        "the system shall be accessible to non-technical users.",
+        "the system shall recover from failures without data loss."
+    ],
+    "non_functional_requirements": [
+        "the system shall generate academic performance reports for students.",
+        "the system shall support concurrent access by at least 500 users.",
+        "the system shall maintain an uptime of 99%, excluding scheduled maintenance."
+    ],
+    "features": [
+        "this srs is also used as an input document for srs segmentation and software feature extraction,",
+        "the system integrates with external services such as email notification systems and authentication",
+        "services.",
+        "the system shall allow users to register using a valid institutional email address.",
+        "the system shall allow users to reset their passwords securely.",
+        "the system shall allow administrators to create student profiles.",
+        "the system shall allow administrators to update student personal and academic information.",
+        "the system shall allow administrators to delete student records when required.",
+        "the system shall allow lecturers to create and update course information.",
+        "the system shall allow administrators to assign lecturers to courses.",
+        "the system shall allow students to enrol in available courses.",
+        "the system shall allow lecturers to submit grades for enrolled students.",
+        "the system shall allow lecturers to update submitted grades before finalization.",
+        "the system depends on third-party email services for notifications.",
+        "the system assumes availability of institutional authentication services."
+    ]
+}

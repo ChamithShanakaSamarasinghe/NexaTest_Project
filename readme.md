@@ -1,186 +1,248 @@
-# NexaTest --- AI-Powered SRS Requirement Analysis Platform
+NexaTest — AI-Powered SRS Requirement Analysis Platform
 
-NexaTest is an **AI-powered Software Requirement Specification (SRS)
-analysis platform** that automates the extraction, analysis, and
-validation of requirements from SRS documents.
+NexaTest is an AI-powered Software Requirement Specification (SRS) analysis platform that automates the extraction, analysis, clustering, and validation of requirements from SRS documents.
 
-The system combines:
+The platform integrates Natural Language Processing (NLP), Machine Learning, and LLM-based analysis to transform raw SRS documents into structured, analyzable data.
 
--   **Streamlit** for an interactive UI
--   **FastAPI** for backend APIs
--   **LLM-based requirement analysis**
--   **Machine Learning models** for keyword extraction, summarization,
-    and entity recognition
--   **Confidence scoring and response validation**
--   **SQLite database** for persistent storage
+It supports automated requirement extraction, feature identification, risk analysis, and confidence scoring.
 
-This enables automated requirement analysis, intelligent question
-answering, and quality evaluation of software requirements.
+🚀 Core Technologies
 
-------------------------------------------------------------------------
+The platform combines multiple technologies:
 
-# 🚀 Key Features
+Streamlit → Interactive UI for SRS upload and analysis
 
-## 1. Streamlit Interface (`srs_app.py`)
+FastAPI → Backend API services
 
-Upload `.docx` SRS documents and automatically extract:
+Machine Learning → Requirement classification and feature clustering
 
--   Sections
--   Requirements
--   Features
+LLM Pipeline → AI-powered requirement analysis
 
-AI-powered analysis includes:
+KeyBERT → Keyword extraction
 
--   **Keyword Extraction** using KeyBERT (`all-MiniLM-L6-v2`)
--   **Entity Recognition** using spaCy NLP pipeline
--   **Summarization** using `sshleifer/distilbart-cnn-12-6`
+spaCy NLP → Named entity recognition
 
-All extracted information is automatically stored in **SQLite
-(`db.sqlite3`)**.
+DistilBART → Text summarization
 
-------------------------------------------------------------------------
+SQLite → Persistent database storage
 
-## 2. FastAPI Backend (`fastapi_app.py`)
+📄 Supported SRS Input
 
-Provides powerful API endpoints for programmatic access.
+NexaTest can process:
 
-### Core Endpoints
+.docx SRS documents (Streamlit UI)
 
-  Endpoint                             Description
-  ------------------------------------ ---------------------------------
-  `/documents`                         List uploaded documents
-  `/documents/{doc_id}/sections`       Retrieve document sections
-  `/documents/{doc_id}/requirements`   Retrieve extracted requirements
-  `/documents/{doc_id}/features`       Retrieve extracted features
-  `/documents/{doc_id}/test-results`   Retrieve automated test results
-  `/documents/{doc_id}/fpr`            Feature Priority Risk analysis
-  `/analytics/{doc_id}`                Test result summary
-  `/process-srs`                       Process SRS programmatically
-  `/full-analysis`                     Complete document analysis
-  `/store-fpr/{doc_id}`                Store FPR clustering results
+.pdf SRS documents (Extractor pipeline)
 
-Swagger API documentation available at:
+The system automatically extracts:
 
-http://127.0.0.1:8000/docs
+Document sections
 
-------------------------------------------------------------------------
+Functional requirements
 
-# 🧠 LLM Requirement Analysis Pipeline
+Non-functional requirements
 
-The system also includes an **LLM-driven requirement analysis
-pipeline**.
+System features
 
-Pipeline Flow:
+🧠 AI Requirement Analysis Pipeline
 
-User Requirement / Question ↓ LLM Generator ↓ Raw Model Response ↓
-Response Post‑Processor (Task 196) ↓ Cleaned Response ↓ Analyzers -
-Semantic Analyzer - Completeness Analyzer - Safety Analyzer ↓ Confidence
-Scorer (Task 200) ↓ Validation Rules ↓ Database Storage ↓ Streamlit UI
-Output
+The platform implements an LLM-driven analysis pipeline.
 
-This allows the system to evaluate how reliable the AI-generated
-responses are.
+Flow:
 
-------------------------------------------------------------------------
+User Question / Requirement
+        ↓
+LLM Generator
+        ↓
+Raw Model Response
+        ↓
+Response Post-Processor
+        ↓
+Cleaned Response
+        ↓
+Analyzers
+   • Semantic Analyzer
+   • Completeness Analyzer
+   • Safety Analyzer
+        ↓
+Confidence Scorer
+        ↓
+Validation Rules
+        ↓
+Database Storage
+        ↓
+Streamlit UI Output
 
-# 📊 Confidence Scoring System
+This pipeline evaluates the quality and reliability of AI-generated answers.
+
+📊 Confidence Scoring System
 
 The confidence score evaluates the reliability of model responses.
 
-  Metric                Weight
-  --------------------- --------
-  Semantic Similarity   0.40
-  Completeness          0.35
-  Safety                0.25
+Metric	Weight
+Semantic Similarity	0.40
+Completeness	0.35
+Safety	0.25
 
 Final Score:
 
-Final Score = (0.4 × Semantic) + (0.35 × Completeness) + (0.25 × Safety)
+Final Score = (0.4 × Semantic) +
+              (0.35 × Completeness) +
+              (0.25 × Safety)
+Confidence Bands
+Score	Band
+≥ 0.85	A
+≥ 0.70	B
+≥ 0.50	C
+< 0.50	D
+🧹 LLM Response Post-Processing (Task 196)
 
-Confidence Bands:
-
-  Score     Band
-  --------- ------
-  ≥ 0.85    A
-  ≥ 0.70    B
-  ≥ 0.50    C
-  \< 0.50   D
-
-------------------------------------------------------------------------
-
-# 🧹 Model Response Post‑Processing (Task 196)
-
-The **post‑processing module** cleans LLM outputs before analysis.
+The post-processing module cleans raw model responses before evaluation.
 
 Functions include:
 
--   Removing filler phrases
--   Trimming whitespace
--   Standardizing formatting
+Removing filler phrases
+
+Cleaning formatting
+
+Normalizing whitespace
+
+Improving readability
 
 Example:
 
-Raw Response:
+Raw Response
 
-Sure! Here's the answer: Users can reset their password.
-
-Processed Response:
-
+Sure! Here's the answer:
 Users can reset their password.
 
-------------------------------------------------------------------------
+Processed Response
 
-# 🔍 Feature Priority Risk (FPR) Analysis
+Users can reset their password.
+🔍 Feature Priority Risk (FPR) Analysis
 
-The platform performs **advanced feature clustering and risk analysis**.
+NexaTest performs Feature Priority Risk analysis to identify important system components and potential risks.
 
-Capabilities:
+Capabilities include:
 
--   Cluster related features and requirements
--   Assign **priority levels** (High / Medium / Low)
--   Identify potential **risks** (Security, Performance, etc.)
--   Calculate **metrics** such as silhouette score for cluster quality
+Feature clustering
 
-This helps identify critical features and risks within SRS documents.
+Requirement-feature mapping
 
-------------------------------------------------------------------------
+Risk identification
 
-# 💾 Database
+Priority classification
 
-All extracted and analyzed data is stored in:
+Cluster quality evaluation
 
-SQLite Database → `db.sqlite3`
+Metrics calculated:
 
-Stored data includes:
+Silhouette Score
 
--   Documents
--   Sections
--   Requirements
--   Features
--   Test results
--   FPR analysis
--   Confidence scores
--   Score breakdowns
+Cluster similarity
 
-------------------------------------------------------------------------
+Feature density
 
-# 📂 Project Structure
+This helps identify critical and high-risk requirements in SRS documents.
 
-NexaTest/ │ ├── src/ │ ├── srs_app.py │ ├── fastapi_app.py │ │ │ ├── db/
-│ │ └── insert_requirements.py │ │ │ ├── llm/ │ │ └── generator.py │ │ │
-└── services/ │ ├── confidence/ │ │ ├── pipeline.py │ │ ├── semantic.py
-│ │ ├── completeness.py │ │ ├── safety.py │ │ ├── scorer.py │ │ ├──
-result.py │ │ └── validator.py │ │ │ └── post_processing/ │ └──
-response_processing/ │ └── post_processor.py │ ├── srs_docs/ ├──
-db.sqlite3 ├── test_pipeline.py ├── requirements.txt └── README.md
+🧾 Automated SRS Extraction Pipeline
 
-------------------------------------------------------------------------
+The SRS extractor pipeline processes documents and updates the database automatically.
 
-# ⚙️ Installation
+Main script:
 
-Clone the repository:
+test_srs_extractor.py
 
-git clone `<your-repo-url>`{=html} cd SRS-NexaTest
+Pipeline steps:
+
+SRS PDF
+   ↓
+Text Cleaning
+   ↓
+Section Detection
+   ↓
+Requirement Extraction
+   ↓
+Feature Identification
+   ↓
+Embedding Generation
+   ↓
+FPR Clustering
+   ↓
+Database Storage
+
+Example Output:
+
+Functional Requirements      : 25
+Non Functional Requirements  : 3
+Extracted Features           : 15
+Database updated successfully
+💾 Database Architecture
+
+All extracted data is stored in:
+
+db.sqlite3
+
+Main tables:
+
+Table	Description
+documents	Uploaded SRS files
+sections	Extracted document sections
+requirements	Functional & non-functional requirements
+features	Extracted features
+fpr_results	Feature priority risk analysis runs
+confidence_scores	AI response confidence scores
+Relationships
+documents
+   ↓
+requirements
+   ↓
+features
+   ↓
+fpr_results
+
+Each FPR analysis run generates a unique fpr_id.
+
+📂 Project Structure
+NexaTest
+│
+├── src
+│   ├── srs_app.py
+│   ├── fastapi_app.py
+│   │
+│   ├── db
+│   │   └── insert_requirements.py
+│   │
+│   ├── llm
+│   │   └── generator.py
+│   │
+│   └── services
+│       ├── confidence
+│       │   ├── pipeline.py
+│       │   ├── semantic.py
+│       │   ├── completeness.py
+│       │   ├── safety.py
+│       │   ├── scorer.py
+│       │   └── validator.py
+│       │
+│       └── post_processing
+│           └── post_processor.py
+│
+├── srs_docs
+│
+├── test_srs_extractor.py
+├── add_fpr_id_column.py
+├── test_pipeline.py
+│
+├── db.sqlite3
+├── requirements.txt
+└── README.md
+⚙️ Installation
+
+Clone repository:
+
+git clone <your-repository-url>
+cd NexaTest
 
 Create virtual environment:
 
@@ -188,80 +250,74 @@ python -m venv venv
 
 Activate environment:
 
-Windows: venv`\Scripts`{=tex}`\activate`{=tex}
+Windows
 
-Mac/Linux: source venv/bin/activate
+venv\Scripts\activate
+
+Mac / Linux
+
+source venv/bin/activate
 
 Install dependencies:
 
 pip install -r requirements.txt
+▶️ Running the System
+Run Streamlit UI
+streamlit run src/srs_app.py
 
-------------------------------------------------------------------------
+Upload an SRS document and perform analysis.
 
-# ▶️ Running the System
-
-## 1. Run Streamlit Interface
-
-streamlit run src`\srs`{=tex}\_app.py
-
-Upload `.docx` SRS documents and automatically process them.
-
-------------------------------------------------------------------------
-
-## 2. Run FastAPI Backend
-
+Run FastAPI Backend
 python -m uvicorn src.fastapi_app:app --reload
 
-Open API documentation:
+API documentation:
 
 http://127.0.0.1:8000/docs
+Run SRS Extraction Pipeline
+python test_srs_extractor.py srs_docs/OSMS_SRS.pdf
 
-------------------------------------------------------------------------
+This will:
 
-## 3. Run LLM Testing Pipeline
+Extract requirements
 
+Extract features
+
+Run FPR analysis
+
+Update the database
+
+Run LLM Testing Interface
 streamlit run test_pipeline.py
 
-This interface allows you to:
+Features:
 
--   Enter a requirement question
--   Generate an LLM response
--   Run response post‑processing
--   Evaluate semantic, completeness, and safety scores
--   Compute final confidence score
+Generate LLM responses
 
-------------------------------------------------------------------------
+Clean responses
 
-# 🧪 Example Pipeline Output
+Evaluate quality
 
-The system displays:
+Compute confidence score
 
--   Raw LLM Answer
--   Cleaned Response
--   Semantic Score
--   Completeness Score
--   Safety Score
--   Final Confidence Score
--   Confidence Band
--   Validation Warnings
+🔮 Future Improvements
 
-------------------------------------------------------------------------
+Planned enhancements include:
 
-# 🔮 Future Improvements
+Retrieval Augmented Generation (RAG)
 
-Possible enhancements:
+OpenAI / HuggingFace / Ollama integration
 
--   OpenAI / HuggingFace / Ollama integration
--   Retrieval Augmented Generation (RAG)
--   Requirement ambiguity detection
--   Advanced SRS quality metrics
--   Visualization dashboards
--   Automated requirement validation
--   CI/CD integration for requirement testing
+Requirement ambiguity detection
 
-------------------------------------------------------------------------
+Automated requirement validation
 
-# 👨‍💻 Author
+SRS quality scoring
 
-Chamith Shanaka Samarasinghe\
-AI/ML & Data Science Intern --- JW Infotech
+Interactive analytics dashboards
+
+CI/CD integration for requirement testing
+
+👨‍💻 Author
+
+Chamith Shanaka Samarasinghe
+AI/ML & Data Science Intern — JW Infotech
