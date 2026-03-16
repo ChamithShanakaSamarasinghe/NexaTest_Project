@@ -1,0 +1,86 @@
+{
+    "FunctionalTests": [
+        {
+            "TestID": "FR-001",
+            "Category": "Functional",
+            "Requirement": "The system shall allow user login",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall allow user login"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow user login",
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-002",
+            "Category": "Functional",
+            "Requirement": "The system shall allow password reset",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall allow password reset"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow password reset",
+            "Priority": "High"
+        }
+    ],
+    "NonFunctionalTests": [
+        {
+            "TestID": "NFR-001",
+            "Category": "NonFunctional",
+            "Requirement": "The system must respond within 2 seconds",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system must respond within 2 seconds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system must respond within 2 seconds",
+            "Priority": "Medium"
+        },
+        {
+            "TestID": "NFR-002",
+            "Category": "NonFunctional",
+            "Requirement": "The system must be secure against unauthorized access",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system must be secure against unauthorized access"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system must be secure against unauthorized access",
+            "Priority": "Medium"
+        }
+    ],
+    "FeatureTests": [
+        {
+            "TestID": "FEAT-001",
+            "Category": "Feature",
+            "Requirement": "Multi-language support",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: Multi-language support"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: Multi-language support",
+            "Priority": "Low"
+        },
+        {
+            "TestID": "FEAT-002",
+            "Category": "Feature",
+            "Requirement": "Dark mode option",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: Dark mode option"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: Dark mode option",
+            "Priority": "Low"
+        }
+    ]
+}

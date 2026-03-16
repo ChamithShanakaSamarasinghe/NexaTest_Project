@@ -1,0 +1,50 @@
+{
+    "Functional": [
+        {
+            "TestID": "FR-001",
+            "Requirement": "The system shall allow user login",
+            "Description": "Verify: The system shall allow user login",
+            "Category": "Functional",
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-002",
+            "Requirement": "The system shall allow password reset",
+            "Description": "Verify: The system shall allow password reset",
+            "Category": "Functional",
+            "Priority": "High"
+        }
+    ],
+    "NonFunctional": [
+        {
+            "TestID": "NFR-001",
+            "Requirement": "The system must respond within 2 seconds",
+            "Description": "Validate: The system must respond within 2 seconds",
+            "Category": "NonFunctional",
+            "Priority": "Medium"
+        },
+        {
+            "TestID": "NFR-002",
+            "Requirement": "The system must be secure against unauthorized access",
+            "Description": "Validate: The system must be secure against unauthorized access",
+            "Category": "NonFunctional",
+            "Priority": "Medium"
+        }
+    ],
+    "Features": [
+        {
+            "TestID": "FEAT=001",
+            "Requirement": "Feature: Multi-language support",
+            "Description": "Check feature: Feature: Multi-language support",
+            "Category": "Feature",
+            "Priority": "Low"
+        },
+        {
+            "TestID": "FEAT=002",
+            "Requirement": "Feature: Dark mode option",
+            "Description": "Check feature: Feature: Dark mode option",
+            "Category": "Feature",
+            "Priority": "Low"
+        }
+    ]
+}
