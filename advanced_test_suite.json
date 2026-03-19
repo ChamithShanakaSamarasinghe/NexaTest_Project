@@ -3,96 +3,6 @@
         {
             "TestID": "FR-001",
             "Category": "Functional",
-            "Requirement": "The system shall allow users to register using a valid institutional email address.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall allow users to register using a valid institutional email address.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow users to register using a valid institutional email address.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall allow users to register using a valid institutional email address.",
-                "Test maximum input length for: The system shall allow users to register using a valid institutional email address."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-002",
-            "Category": "Functional",
-            "Requirement": "The system shall authenticate users using encrypted credentials.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall authenticate users using encrypted credentials.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall authenticate users using encrypted credentials.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall authenticate users using encrypted credentials.",
-                "Test maximum input length for: The system shall authenticate users using encrypted credentials."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-003",
-            "Category": "Functional",
-            "Requirement": "The system shall allow users to reset their passwords securely.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall allow users to reset their passwords securely.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow users to reset their passwords securely.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall allow users to reset their passwords securely.",
-                "Test maximum input length for: The system shall allow users to reset their passwords securely."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-004",
-            "Category": "Functional",
-            "Requirement": "The system shall enforce role-based access control (RBAC).",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall enforce role-based access control (RBAC).",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall enforce role-based access control (RBAC).",
-            "EdgeCases": [
-                "Test invalid input for: The system shall enforce role-based access control (RBAC).",
-                "Test maximum input length for: The system shall enforce role-based access control (RBAC)."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-005",
-            "Category": "Functional",
-            "Requirement": "The system shall allow administrators to create student profiles.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall allow administrators to create student profiles.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow administrators to create student profiles.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall allow administrators to create student profiles.",
-                "Test maximum input length for: The system shall allow administrators to create student profiles."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-006",
-            "Category": "Functional",
             "Requirement": "The system shall allow administrators to update student personal and academic information.",
             "Precondition": "System is running and user has access",
             "TestSteps": [
@@ -109,61 +19,25 @@
             "Priority": "High"
         },
         {
-            "TestID": "FR-007",
+            "TestID": "FR-002",
             "Category": "Functional",
-            "Requirement": "The system shall allow administrators to delete student records when required.",
+            "Requirement": "The system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge.",
             "Precondition": "System is running and user has access",
             "TestSteps": [
                 "Open the application",
                 "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall allow administrators to delete student records when required.",
+                "Perform action described in requirement: The system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge.",
                 "Verify the action succeeds"
             ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow administrators to delete student records when required.",
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge.",
             "EdgeCases": [
-                "Test invalid input for: The system shall allow administrators to delete student records when required.",
-                "Test maximum input length for: The system shall allow administrators to delete student records when required."
+                "Test invalid input for: The system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge.",
+                "Test maximum input length for: The system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge."
             ],
             "Priority": "High"
         },
         {
-            "TestID": "FR-008",
-            "Category": "Functional",
-            "Requirement": "The system shall persist student records in a centralized database.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall persist student records in a centralized database.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall persist student records in a centralized database.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall persist student records in a centralized database.",
-                "Test maximum input length for: The system shall persist student records in a centralized database."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-009",
-            "Category": "Functional",
-            "Requirement": "The system shall allow lecturers to create and update course information.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall allow lecturers to create and update course information.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow lecturers to create and update course information.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall allow lecturers to create and update course information.",
-                "Test maximum input length for: The system shall allow lecturers to create and update course information."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-010",
+            "TestID": "FR-003",
             "Category": "Functional",
             "Requirement": "The system shall allow administrators to assign lecturers to courses.",
             "Precondition": "System is running and user has access",
@@ -181,7 +55,7 @@
             "Priority": "High"
         },
         {
-            "TestID": "FR-011",
+            "TestID": "FR-004",
             "Category": "Functional",
             "Requirement": "The system shall allow students to enrol in available courses.",
             "Precondition": "System is running and user has access",
@@ -199,7 +73,7 @@
             "Priority": "High"
         },
         {
-            "TestID": "FR-012",
+            "TestID": "FR-005",
             "Category": "Functional",
             "Requirement": "The system shall allow lecturers to submit grades for enrolled students.",
             "Precondition": "System is running and user has access",
@@ -213,6 +87,132 @@
             "EdgeCases": [
                 "Test invalid input for: The system shall allow lecturers to submit grades for enrolled students.",
                 "Test maximum input length for: The system shall allow lecturers to submit grades for enrolled students."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-006",
+            "Category": "Functional",
+            "Requirement": "The system shall allow administrators to delete student records when required.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall allow administrators to delete student records when required.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow administrators to delete student records when required.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall allow administrators to delete student records when required.",
+                "Test maximum input length for: The system shall allow administrators to delete student records when required."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-007",
+            "Category": "Functional",
+            "Requirement": "The system shall provide a user-friendly interface.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall provide a user-friendly interface.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall provide a user-friendly interface.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall provide a user-friendly interface.",
+                "Test maximum input length for: The system shall provide a user-friendly interface."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-008",
+            "Category": "Functional",
+            "Requirement": "The system shall log report generation activities for audit purposes.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall log report generation activities for audit purposes.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall log report generation activities for audit purposes.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall log report generation activities for audit purposes.",
+                "Test maximum input length for: The system shall log report generation activities for audit purposes."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-009",
+            "Category": "Functional",
+            "Requirement": "The system shall authenticate users using encrypted credentials.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall authenticate users using encrypted credentials.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall authenticate users using encrypted credentials.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall authenticate users using encrypted credentials.",
+                "Test maximum input length for: The system shall authenticate users using encrypted credentials."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-010",
+            "Category": "Functional",
+            "Requirement": "The system shall encrypt sensitive data at rest and in transit.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall encrypt sensitive data at rest and in transit.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall encrypt sensitive data at rest and in transit.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall encrypt sensitive data at rest and in transit.",
+                "Test maximum input length for: The system shall encrypt sensitive data at rest and in transit."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-011",
+            "Category": "Functional",
+            "Requirement": "The system shall respond to user requests within 2 seconds under normal operating conditions.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall respond to user requests within 2 seconds under normal operating conditions.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall respond to user requests within 2 seconds under normal operating conditions.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall respond to user requests within 2 seconds under normal operating conditions.",
+                "Test maximum input length for: The system shall respond to user requests within 2 seconds under normal operating conditions."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-012",
+            "Category": "Functional",
+            "Requirement": "The system shall restrict access to system resources based on user roles.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall restrict access to system resources based on user roles.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall restrict access to system resources based on user roles.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall restrict access to system resources based on user roles.",
+                "Test maximum input length for: The system shall restrict access to system resources based on user roles."
             ],
             "Priority": "High"
         },
@@ -237,60 +237,6 @@
         {
             "TestID": "FR-014",
             "Category": "Functional",
-            "Requirement": "The system shall calculate grade point averages automatically.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall calculate grade point averages automatically.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall calculate grade point averages automatically.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall calculate grade point averages automatically.",
-                "Test maximum input length for: The system shall calculate grade point averages automatically."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-015",
-            "Category": "Functional",
-            "Requirement": "The system shall generate academic performance reports for students.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall generate academic performance reports for students.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall generate academic performance reports for students.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall generate academic performance reports for students.",
-                "Test maximum input length for: The system shall generate academic performance reports for students."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-016",
-            "Category": "Functional",
-            "Requirement": "The system shall generate reports in PDF format.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall generate reports in PDF format.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall generate reports in PDF format.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall generate reports in PDF format.",
-                "Test maximum input length for: The system shall generate reports in PDF format."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-017",
-            "Category": "Functional",
             "Requirement": "The system shall notify students via email when grades are published.",
             "Precondition": "System is running and user has access",
             "TestSteps": [
@@ -307,133 +253,25 @@
             "Priority": "High"
         },
         {
-            "TestID": "FR-018",
+            "TestID": "FR-015",
             "Category": "Functional",
-            "Requirement": "The system shall log report generation activities for audit purposes.",
+            "Requirement": "The system shall recover from failures without data loss.",
             "Precondition": "System is running and user has access",
             "TestSteps": [
                 "Open the application",
                 "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall log report generation activities for audit purposes.",
+                "Perform action described in requirement: The system shall recover from failures without data loss.",
                 "Verify the action succeeds"
             ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall log report generation activities for audit purposes.",
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall recover from failures without data loss.",
             "EdgeCases": [
-                "Test invalid input for: The system shall log report generation activities for audit purposes.",
-                "Test maximum input length for: The system shall log report generation activities for audit purposes."
+                "Test invalid input for: The system shall recover from failures without data loss.",
+                "Test maximum input length for: The system shall recover from failures without data loss."
             ],
             "Priority": "High"
         },
         {
-            "TestID": "FR-019",
-            "Category": "Functional",
-            "Requirement": "The system shall respond to user requests within 2 seconds under normal operating",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall respond to user requests within 2 seconds under normal operating",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall respond to user requests within 2 seconds under normal operating",
-            "EdgeCases": [
-                "Test invalid input for: The system shall respond to user requests within 2 seconds under normal operating",
-                "Test maximum input length for: The system shall respond to user requests within 2 seconds under normal operating"
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-020",
-            "Category": "Functional",
-            "Requirement": "The system shall support concurrent access by at least 500 users.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall support concurrent access by at least 500 users.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall support concurrent access by at least 500 users.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall support concurrent access by at least 500 users.",
-                "Test maximum input length for: The system shall support concurrent access by at least 500 users."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-021",
-            "Category": "Functional",
-            "Requirement": "The system shall encrypt sensitive data at rest and in transit.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall encrypt sensitive data at rest and in transit.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall encrypt sensitive data at rest and in transit.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall encrypt sensitive data at rest and in transit.",
-                "Test maximum input length for: The system shall encrypt sensitive data at rest and in transit."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-022",
-            "Category": "Functional",
-            "Requirement": "The system shall log all authentication and authorization attempts.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall log all authentication and authorization attempts.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall log all authentication and authorization attempts.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall log all authentication and authorization attempts.",
-                "Test maximum input length for: The system shall log all authentication and authorization attempts."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-023",
-            "Category": "Functional",
-            "Requirement": "The system shall restrict access to system resources based on user roles.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall restrict access to system resources based on user roles.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall restrict access to system resources based on user roles.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall restrict access to system resources based on user roles.",
-                "Test maximum input length for: The system shall restrict access to system resources based on user roles."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-024",
-            "Category": "Functional",
-            "Requirement": "The system shall provide a user-friendly interface.",
-            "Precondition": "System is running and user has access",
-            "TestSteps": [
-                "Open the application",
-                "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall provide a user-friendly interface.",
-                "Verify the action succeeds"
-            ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall provide a user-friendly interface.",
-            "EdgeCases": [
-                "Test invalid input for: The system shall provide a user-friendly interface.",
-                "Test maximum input length for: The system shall provide a user-friendly interface."
-            ],
-            "Priority": "High"
-        },
-        {
-            "TestID": "FR-025",
+            "TestID": "FR-016",
             "Category": "Functional",
             "Requirement": "The system shall be accessible to non-technical users.",
             "Precondition": "System is running and user has access",
@@ -451,7 +289,43 @@
             "Priority": "High"
         },
         {
-            "TestID": "FR-026",
+            "TestID": "FR-017",
+            "Category": "Functional",
+            "Requirement": "The system shall allow users to reset their passwords securely.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall allow users to reset their passwords securely.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow users to reset their passwords securely.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall allow users to reset their passwords securely.",
+                "Test maximum input length for: The system shall allow users to reset their passwords securely."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-018",
+            "Category": "Functional",
+            "Requirement": "The system shall allow users to register using a valid institutional email address.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall allow users to register using a valid institutional email address.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow users to register using a valid institutional email address.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall allow users to register using a valid institutional email address.",
+                "Test maximum input length for: The system shall allow users to register using a valid institutional email address."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-019",
             "Category": "Functional",
             "Requirement": "The system shall maintain an uptime of 99%, excluding scheduled maintenance.",
             "Precondition": "System is running and user has access",
@@ -469,20 +343,164 @@
             "Priority": "High"
         },
         {
-            "TestID": "FR-027",
+            "TestID": "FR-020",
             "Category": "Functional",
-            "Requirement": "The system shall recover from failures without data loss.",
+            "Requirement": "The system shall allow lecturers to create and update course information.",
             "Precondition": "System is running and user has access",
             "TestSteps": [
                 "Open the application",
                 "Navigate to the relevant feature",
-                "Perform action described in requirement: The system shall recover from failures without data loss.",
+                "Perform action described in requirement: The system shall allow lecturers to create and update course information.",
                 "Verify the action succeeds"
             ],
-            "ExpectedResult": "The system successfully satisfies the requirement: The system shall recover from failures without data loss.",
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow lecturers to create and update course information.",
             "EdgeCases": [
-                "Test invalid input for: The system shall recover from failures without data loss.",
-                "Test maximum input length for: The system shall recover from failures without data loss."
+                "Test invalid input for: The system shall allow lecturers to create and update course information.",
+                "Test maximum input length for: The system shall allow lecturers to create and update course information."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-021",
+            "Category": "Functional",
+            "Requirement": "The system shall persist student records in a centralized database.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall persist student records in a centralized database.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall persist student records in a centralized database.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall persist student records in a centralized database.",
+                "Test maximum input length for: The system shall persist student records in a centralized database."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-022",
+            "Category": "Functional",
+            "Requirement": "The system shall calculate grade point averages automatically.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall calculate grade point averages automatically.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall calculate grade point averages automatically.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall calculate grade point averages automatically.",
+                "Test maximum input length for: The system shall calculate grade point averages automatically."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-023",
+            "Category": "Functional",
+            "Requirement": "The system shall generate academic performance reports for students.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall generate academic performance reports for students.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall generate academic performance reports for students.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall generate academic performance reports for students.",
+                "Test maximum input length for: The system shall generate academic performance reports for students."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-024",
+            "Category": "Functional",
+            "Requirement": "The system shall generate reports in PDF format.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall generate reports in PDF format.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall generate reports in PDF format.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall generate reports in PDF format.",
+                "Test maximum input length for: The system shall generate reports in PDF format."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-025",
+            "Category": "Functional",
+            "Requirement": "The system shall allow administrators to create student profiles.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall allow administrators to create student profiles.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall allow administrators to create student profiles.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall allow administrators to create student profiles.",
+                "Test maximum input length for: The system shall allow administrators to create student profiles."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-026",
+            "Category": "Functional",
+            "Requirement": "The system shall log all authentication and authorization attempts.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall log all authentication and authorization attempts.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall log all authentication and authorization attempts.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall log all authentication and authorization attempts.",
+                "Test maximum input length for: The system shall log all authentication and authorization attempts."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-027",
+            "Category": "Functional",
+            "Requirement": "The system shall support concurrent access by at least 500 users.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall support concurrent access by at least 500 users.",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall support concurrent access by at least 500 users.",
+            "EdgeCases": [
+                "Test invalid input for: The system shall support concurrent access by at least 500 users.",
+                "Test maximum input length for: The system shall support concurrent access by at least 500 users."
+            ],
+            "Priority": "High"
+        },
+        {
+            "TestID": "FR-028",
+            "Category": "Functional",
+            "Requirement": "The system shall enforce role-based access control (RBAC).",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the relevant feature",
+                "Perform action described in requirement: The system shall enforce role-based access control (RBAC).",
+                "Verify the action succeeds"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system shall enforce role-based access control (RBAC).",
+            "EdgeCases": [
+                "Test invalid input for: The system shall enforce role-based access control (RBAC).",
+                "Test maximum input length for: The system shall enforce role-based access control (RBAC)."
             ],
             "Priority": "High"
         }
@@ -527,6 +545,24 @@
         {
             "TestID": "NFR-003",
             "Category": "NonFunctional",
+            "Requirement": "The system must comply with institutional IT policies and data protection regulations.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Perform action relevant to the requirement",
+                "Measure or validate: The system must comply with institutional IT policies and data protection regulations.",
+                "Verify requirement is met"
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: The system must comply with institutional IT policies and data protection regulations.",
+            "EdgeCases": [
+                "Test system under load for: The system must comply with institutional IT policies and data protection regulations.",
+                "Test system under peak usage for: The system must comply with institutional IT policies and data protection regulations."
+            ],
+            "Priority": "Medium"
+        },
+        {
+            "TestID": "NFR-004",
+            "Category": "NonFunctional",
             "Requirement": "The system must comply with institutional data protection policies.",
             "Precondition": "System is running and user has access",
             "TestSteps": [
@@ -543,5 +579,23 @@
             "Priority": "Medium"
         }
     ],
-    "FeatureTests": []
+    "FeatureTests": [
+        {
+            "TestID": "FEAT-001",
+            "Category": "Feature",
+            "Requirement": "feature extraction, where requirements are analysed, classified, and prepared for training intelligent systems.",
+            "Precondition": "System is running and user has access",
+            "TestSteps": [
+                "Open the application",
+                "Navigate to the feature or settings",
+                "Verify feature works as decribed: feature extraction, where requirements are analysed, classified, and prepared for training intelligent systems."
+            ],
+            "ExpectedResult": "The system successfully satisfies the requirement: feature extraction, where requirements are analysed, classified, and prepared for training intelligent systems.",
+            "EdgeCases": [
+                "Test feature with unusual settings: feature extraction, where requirements are analysed, classified, and prepared for training intelligent systems.",
+                "Test feature under maximum limits: feature extraction, where requirements are analysed, classified, and prepared for training intelligent systems."
+            ],
+            "Priority": "Low"
+        }
+    ]
 }
