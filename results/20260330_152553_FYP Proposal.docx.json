@@ -1,0 +1,213 @@
+{
+    "sections": [],
+    "requirements": [
+        "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)",
+        "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)",
+        "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration."
+    ],
+    "features": [],
+    "test_cases": [
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_1_1",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_1_2",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_1_3",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_1_4",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)"
+        },
+        {
+            "id": "TC_1_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_1_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_1_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_1_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "According to the reports, the separation Monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (IJtsma et al., 2022)",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_2_1",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_2_2",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_2_3",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_2_4",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)"
+        },
+        {
+            "id": "TC_2_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_2_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_2_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_2_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The problem with the separation monitor, is directly connected with the New Aircraft Creation Intervals where there is high traffic intervals and low traffic intervals. During a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. In order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low Traffic Intervals. (Velasco et al.)",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_3_1",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration."
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_3_2",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration."
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_3_3",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration."
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_3_4",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration."
+        },
+        {
+            "id": "TC_3_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration.",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_3_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration.",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_3_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration.",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_3_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "When doing this research, one of the major challenges that I could get is reliable resources about this problem. When trying to solve this I need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. The technology they have used should also be taken into consideration.",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        }
+    ],
+    "clean_text": "cover page machine learning for adaptive decision-making in air traffic controllers. chapter 1: problem chapter overview introduction problem background/ problem domain problem background  challenges of dynamic and unpredictable nature of air traffic problem domain  aviation my final research study in the field of aviation focuses on using machine learning to support adaptive decision-making in air traffic control (atc). the goal is to provide air traffic controllers with intelligent technologies that can dynamically modify their decision-making processes in response to changing circumstances by utilising sophisticated algorithms. modern technology and aviation safety come together to address the need to improve atc operations in the face of growing flight traffic and challenging airspace management. problem definition being an air traffic controller is considered one of the most important yet stressful jobs out there. air traffic controllers have responsibility of ensuring that the aeroplanes get the right message to protect the passengers flying in the aeroplane. but out of everything, there is one challenge that almost every air traffic controller experiences. and that is the dynamic and unpredictable nature of air traffic. so, by using machine learning for adaptive decision-making in air traffic controllers, can solve the problems that is arising by taking the data from past incidents that has happened and get the date of real time analysis from the aeroplanes. motivation only two aircrafts are shown in the critical area, and when a new aircraft comes to the critical area when another leaves, it gives less time for the air traffic controllers to make a quick an safe decision. problem statement the movement of aircraft over critical regions presents a significant challenge to air traffic controllers (atcs) in modern air traffic control scenarios in terms of making fast and effective decisions. this particular problem occurs when there are only two flights in the crucial region at any given time, and one of them leaves the area quickly after the other arrives. the aircraft in the critical zone are changing so quickly that it makes it more difficult for the atcs to make timely, correct choices. the main task is to create an adaptive decision-making system that uses machine learning methods to improve air traffic controllers' accuracy and responsiveness when directing aircraft through crucial zones. the decision-making procedures of the system ought to be dynamically adjusted to account for the ever-changing critical zone, taking into account the built-in challenges brought about by aircraft's frequent entry and departure. existing work research gap a visual aid called the \u201cseparation monitor\u201d has been developed by the national air services in the united kingdom, where a 2-d plot has been shown with each point showing that both the aircrafts are facing towards each other. (ijtsma et al., 2022) figure 1 according to the reports, the separation monitor shows several aircrafts in one screen but only two aircraft details will be shown and can prevent any type of collision by giving the correct decision, but once that collision is being prevented, another aircraft will be entering into the critical area, there will be less stability and there will be secondary conflicts due the air traffic controllers having less time to take the correct decision. (ijtsma et al., 2022) the problem with the separation monitor, is directly connected with the new aircraft creation intervals where there is high traffic intervals and low traffic intervals. during a high traffic interval, new aircrafts are generated in the simulation every 150 seconds and in the low traffic intervals, new aircrafts are generated in the simulation every 200 seconds. in order to ensure the safety of the passengers, the aircraft should get even more time during the traffic interval in both high and low traffic intervals. (velasco et al.) research challenge when doing this research, one of the major challenges that i could get is reliable resources about this problem. when trying to solve this i need to carefully think about how the algorithms being used and where have the algorithms have been used in to create the current stage of the problem. the technology they have used should also be taken into consideration. research aim my aim in doing this research paper is to reduce the amount of collisions that happens due to the inaccurate quick decisions made by the air traffic controller and prevent the negative outcome of the passengers flying in the aircraft. research objectives chapter overview chapter 02 methodology research methodology in my research paper, i am going to design a simulation to predict the possible outcomes of an aircraft when entering a critical area as soon another leaves the critical area. at the current stage there are many simulations being implemented but, terminal radar approach control (tracon) is a type of simulation that currently have a success rate of prediction which is 90.61% and the associated missed alert rate is 9.39%. as per the research, the false alert rate is significantly high with 10.62%. (katkin et al., 2013) my simulation would increase the success rate of prediction from 90.61% to at least 95% and reduce the rate of false alert. development methodology project management methodology project scope develop a model/simulation for making accurate decisions to avoid conflicts of aircrafts. schedule gantt chart deliverables and dates resource requirements risks and mitigations risks mitigations top risks chapter summary",
+    "fpr": {
+        "clusters": [
+            1,
+            0,
+            1
+        ],
+        "keywords": {
+            "0": [
+                "traffic",
+                "intervals",
+                "new",
+                "low",
+                "high"
+            ],
+            "1": [
+                "used",
+                "correct",
+                "problem",
+                "decision",
+                "algorithms"
+            ]
+        },
+        "metrics": {
+            "silhouette_score": 0.18185780650445338,
+            "total_requirements": 3,
+            "total_clusters": 2
+        }
+    },
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}

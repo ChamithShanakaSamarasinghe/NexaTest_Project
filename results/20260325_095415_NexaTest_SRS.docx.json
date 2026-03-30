@@ -1,0 +1,632 @@
+{
+    "sections": [],
+    "requirements": [
+        "The system should extract readable text from uploaded PDF files.",
+        "The system shall divide SRS text into structured sections such as Introduction, Functional Requirements, and Non\u2011Functional Requirements.",
+        "The system shall identify and extract functional requirements from the SRS content.",
+        "The system shall generate sample test cases from extracted requirements.",
+        "The system should provide REST API endpoints for upload, requirement retrieval, and test generation.",
+        "FR\u20111 The system shall accept SRS documents in PDF format.",
+        "FR\u20112 The system shall store uploaded SRS files.",
+        "FR\u20113 The system shall extract text from uploaded PDFs.",
+        "FR\u20114 The system shall segment SRS sections automatically.",
+        "FR\u20115 The system shall extract functional requirements.",
+        "FR\u20116 The system shall return requirements via API.",
+        "FR\u20117 The system shall generate test cases from requirements.",
+        "FR\u20118 The system shall return test cases in JSON format.",
+        "FR\u20119 The system shall support automated pytest validation endpoints.",
+        "NFR\u20111 The system should respond to API requests within 2 seconds for small SRS files.",
+        "NFR\u20112 The system shall handle invalid file uploads safely.",
+        "NFR\u20113 The system shall be modular and maintainable.",
+        "NFR\u20114 The system shall support unit and API testing.",
+        "NFR\u20115 The system should run in a virtual environment without conflicts."
+    ],
+    "features": [
+        "3. System Features"
+    ],
+    "test_cases": [
+        {
+            "id": "TC_1",
+            "requirement": "The system should extract readable text from uploaded PDF files.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_2",
+            "requirement": "The system should extract readable text from uploaded PDF files.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_3",
+            "requirement": "The system should extract readable text from uploaded PDF files.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_4",
+            "requirement": "The system should extract readable text from uploaded PDF files.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_5",
+            "requirement": "The system shall divide SRS text into structured sections such as Introduction, Functional Requirements, and Non\u2011Functional Requirements.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_6",
+            "requirement": "The system shall divide SRS text into structured sections such as Introduction, Functional Requirements, and Non\u2011Functional Requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_7",
+            "requirement": "The system shall divide SRS text into structured sections such as Introduction, Functional Requirements, and Non\u2011Functional Requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_8",
+            "requirement": "The system shall divide SRS text into structured sections such as Introduction, Functional Requirements, and Non\u2011Functional Requirements.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_9",
+            "requirement": "The system shall identify and extract functional requirements from the SRS content.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_10",
+            "requirement": "The system shall identify and extract functional requirements from the SRS content.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_11",
+            "requirement": "The system shall identify and extract functional requirements from the SRS content.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_12",
+            "requirement": "The system shall identify and extract functional requirements from the SRS content.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_13",
+            "requirement": "The system shall generate sample test cases from extracted requirements.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_14",
+            "requirement": "The system shall generate sample test cases from extracted requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_15",
+            "requirement": "The system shall generate sample test cases from extracted requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_16",
+            "requirement": "The system shall generate sample test cases from extracted requirements.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_17",
+            "requirement": "The system should provide REST API endpoints for upload, requirement retrieval, and test generation.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_18",
+            "requirement": "The system should provide REST API endpoints for upload, requirement retrieval, and test generation.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_19",
+            "requirement": "The system should provide REST API endpoints for upload, requirement retrieval, and test generation.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_20",
+            "requirement": "The system should provide REST API endpoints for upload, requirement retrieval, and test generation.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_21",
+            "requirement": "FR\u20111 The system shall accept SRS documents in PDF format.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_22",
+            "requirement": "FR\u20111 The system shall accept SRS documents in PDF format.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_23",
+            "requirement": "FR\u20111 The system shall accept SRS documents in PDF format.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_24",
+            "requirement": "FR\u20111 The system shall accept SRS documents in PDF format.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_25",
+            "requirement": "FR\u20112 The system shall store uploaded SRS files.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_26",
+            "requirement": "FR\u20112 The system shall store uploaded SRS files.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_27",
+            "requirement": "FR\u20112 The system shall store uploaded SRS files.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_28",
+            "requirement": "FR\u20112 The system shall store uploaded SRS files.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_29",
+            "requirement": "FR\u20113 The system shall extract text from uploaded PDFs.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_30",
+            "requirement": "FR\u20113 The system shall extract text from uploaded PDFs.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_31",
+            "requirement": "FR\u20113 The system shall extract text from uploaded PDFs.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_32",
+            "requirement": "FR\u20113 The system shall extract text from uploaded PDFs.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_33",
+            "requirement": "FR\u20114 The system shall segment SRS sections automatically.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_34",
+            "requirement": "FR\u20114 The system shall segment SRS sections automatically.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_35",
+            "requirement": "FR\u20114 The system shall segment SRS sections automatically.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_36",
+            "requirement": "FR\u20114 The system shall segment SRS sections automatically.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_37",
+            "requirement": "FR\u20115 The system shall extract functional requirements.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_38",
+            "requirement": "FR\u20115 The system shall extract functional requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_39",
+            "requirement": "FR\u20115 The system shall extract functional requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_40",
+            "requirement": "FR\u20115 The system shall extract functional requirements.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_41",
+            "requirement": "FR\u20116 The system shall return requirements via API.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_42",
+            "requirement": "FR\u20116 The system shall return requirements via API.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_43",
+            "requirement": "FR\u20116 The system shall return requirements via API.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_44",
+            "requirement": "FR\u20116 The system shall return requirements via API.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_45",
+            "requirement": "FR\u20117 The system shall generate test cases from requirements.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_46",
+            "requirement": "FR\u20117 The system shall generate test cases from requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_47",
+            "requirement": "FR\u20117 The system shall generate test cases from requirements.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_48",
+            "requirement": "FR\u20117 The system shall generate test cases from requirements.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_49",
+            "requirement": "FR\u20118 The system shall return test cases in JSON format.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_50",
+            "requirement": "FR\u20118 The system shall return test cases in JSON format.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_51",
+            "requirement": "FR\u20118 The system shall return test cases in JSON format.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_52",
+            "requirement": "FR\u20118 The system shall return test cases in JSON format.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_53",
+            "requirement": "FR\u20119 The system shall support automated pytest validation endpoints.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_54",
+            "requirement": "FR\u20119 The system shall support automated pytest validation endpoints.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_55",
+            "requirement": "FR\u20119 The system shall support automated pytest validation endpoints.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_56",
+            "requirement": "FR\u20119 The system shall support automated pytest validation endpoints.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_57",
+            "requirement": "NFR\u20111 The system should respond to API requests within 2 seconds for small SRS files.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_58",
+            "requirement": "NFR\u20111 The system should respond to API requests within 2 seconds for small SRS files.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_59",
+            "requirement": "NFR\u20111 The system should respond to API requests within 2 seconds for small SRS files.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_60",
+            "requirement": "NFR\u20111 The system should respond to API requests within 2 seconds for small SRS files.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_61",
+            "requirement": "NFR\u20112 The system shall handle invalid file uploads safely.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_62",
+            "requirement": "NFR\u20112 The system shall handle invalid file uploads safely.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_63",
+            "requirement": "NFR\u20112 The system shall handle invalid file uploads safely.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_64",
+            "requirement": "NFR\u20112 The system shall handle invalid file uploads safely.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_65",
+            "requirement": "NFR\u20113 The system shall be modular and maintainable.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_66",
+            "requirement": "NFR\u20113 The system shall be modular and maintainable.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_67",
+            "requirement": "NFR\u20113 The system shall be modular and maintainable.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_68",
+            "requirement": "NFR\u20113 The system shall be modular and maintainable.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_69",
+            "requirement": "NFR\u20114 The system shall support unit and API testing.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_70",
+            "requirement": "NFR\u20114 The system shall support unit and API testing.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_71",
+            "requirement": "NFR\u20114 The system shall support unit and API testing.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_72",
+            "requirement": "NFR\u20114 The system shall support unit and API testing.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        },
+        {
+            "id": "TC_73",
+            "requirement": "NFR\u20115 The system should run in a virtual environment without conflicts.",
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure"
+        },
+        {
+            "id": "TC_74",
+            "requirement": "NFR\u20115 The system should run in a virtual environment without conflicts.",
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted"
+        },
+        {
+            "id": "TC_75",
+            "requirement": "NFR\u20115 The system should run in a virtual environment without conflicts.",
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected"
+        },
+        {
+            "id": "TC_76",
+            "requirement": "NFR\u20115 The system should run in a virtual environment without conflicts.",
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly"
+        }
+    ],
+    "clean_text": "software requirements specification (srs)\nnexatest \u2013 srs analysis & test case generation system 1. introduction 1.1 purpose the purpose of nexatest is to automatically analyze software requirement specification (srs) documents, extract requirements, and generate structured test cases using an automated pipeline and api services. 1.2 scope nexatest allows users to upload srs documents (pdf), extract text, segment sections, identify functional requirements, and generate suggested test cases. the system is designed for qa teams, interns, and analysts to accelerate requirement understanding and test design. 1.3 definitions srs \u2014 software requirements specification api \u2014 application programming interface fr \u2014 functional requirement nfr \u2014 non\u2011functional requirement 2. overall description 2.1 product perspective nexatest is a backend api-driven system built with fastapi and python. it processes srs documents and produces structured outputs for testing workflows. 2.2 product functions upload srs pdf documents extract text from srs files segment srs into logical sections extract functional requirements store extracted artifacts generate sample test cases provide api endpoints for automation 2.3 user classes qa engineers test analysts developers interns and researchers 2.4 operating environment python 3.x fastapi pytest local file storage virtual environmental support 3. system features 3.1 srs upload the system allows users to upload srs documents via an api endpoint. 3.2 text extraction the system should extract readable text from uploaded pdf files. 3.3 section segmentation the system shall divide srs text into structured sections such as introduction, functional requirements, and non\u2011functional requirements. 3.4 requirement extraction the system shall identify and extract functional requirements from the srs content. 3.5 test case generation the system shall generate sample test cases from extracted requirements. 3.6 api access the system should provide rest api endpoints for upload, requirement retrieval, and test generation. 4. functional requirements fr\u20111 the system shall accept srs documents in pdf format. fr\u20112 the system shall store uploaded srs files. fr\u20113 the system shall extract text from uploaded pdfs. fr\u20114 the system shall segment srs sections automatically. fr\u20115 the system shall extract functional requirements. fr\u20116 the system shall return requirements via api. fr\u20117 the system shall generate test cases from requirements. fr\u20118 the system shall return test cases in json format. fr\u20119 the system shall support automated pytest validation endpoints. 5. non\u2011functional requirements nfr\u20111 the system should respond to api requests within 2 seconds for small srs files. nfr\u20112 the system shall handle invalid file uploads safely. nfr\u20113 the system shall be modular and maintainable. nfr\u20114 the system shall support unit and api testing. nfr\u20115 the system should run in a virtual environment without conflicts. 6. external interface requirements 6.1 api interface post /upload-srs \u2014 upload srs file get /requirements/{id} \u2014 get extracted requirements post /generate-tests/{id} \u2014 generate test cases 6.2 file interface pdf documents are accepted as input. 7. future enhancements database persistence ml-based requirement classification advanced nlp extraction ui dashboard test case export to excel/test tools",
+    "fpr": {
+        "clusters": [
+            4,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            3,
+            3,
+            3,
+            3
+        ],
+        "keywords": {
+            "0": [
+                "shall",
+                "fr",
+                "requirements",
+                "srs",
+                "cases"
+            ],
+            "1": [
+                "functional",
+                "requirements",
+                "non",
+                "divide",
+                "sections"
+            ],
+            "2": [
+                "endpoints",
+                "api",
+                "upload",
+                "retrieval",
+                "provide"
+            ],
+            "3": [
+                "nfr",
+                "shall",
+                "api",
+                "virtual",
+                "maintainable"
+            ],
+            "4": [
+                "uploaded",
+                "text",
+                "extract",
+                "pdfs",
+                "shall"
+            ]
+        },
+        "metrics": {
+            "silhouette_score": 0.08327571345741383,
+            "total_requirements": 19,
+            "total_clusters": 5
+        }
+    },
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}

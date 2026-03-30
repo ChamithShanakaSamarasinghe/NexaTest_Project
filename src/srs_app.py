@@ -11,9 +11,12 @@ import plotly.express as px
 # ✅ Adding project root to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# 🔥 Importing AI modules
+# 🔥 AI modules
 from src.enhancer import PipelineEnhancer
 from src.fpr.fpr_pipeline import run_fpr_pipeline
+
+# 🔥 Test Case Generator
+from src.testcase.generator import generate_test_cases
 
 # Paths
 DB_FILE = "db.sqlite3"
@@ -23,10 +26,9 @@ RESULTS_FOLDER = "results"
 os.makedirs(SRS_FOLDER, exist_ok=True)
 os.makedirs(RESULTS_FOLDER, exist_ok=True)
 
-# Initializing Enhancer
 enhancer = PipelineEnhancer()
 
-# Database Utility
+# Database section
 def insert_into_db(doc_filename, sections, requirements, features, test_results, fpr_result):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
@@ -73,11 +75,10 @@ def insert_into_db(doc_filename, sections, requirements, features, test_results,
     return doc_id
 
 
-# Streamlit UI
+# UI section
 st.set_page_config(page_title="🚀 SRS Automation Platform", layout="wide")
 st.title("🚀 SRS Automation Platform (AI Powered)")
 
-# ✅Allow PDF + DOCX
 uploaded_file = st.file_uploader(
     "Upload your SRS (.docx / .pdf) file", type=["docx", "pdf"]
 )
@@ -92,7 +93,7 @@ if uploaded_file:
 
     st.success(f"✅ SRS file saved: {srs_filename}")
 
-    # ✅Handling DOCX + PDF
+    # Reading the file
     paragraphs = []
 
     if uploaded_file.name.endswith(".docx"):
@@ -110,7 +111,7 @@ if uploaded_file:
         st.error("Unsupported file format")
         st.stop()
 
-    # Extracting Sections, Requirements, Features
+    # Extraction
     sections, requirements, features = [], [], []
     current_section = None
     full_text = ""
@@ -122,7 +123,6 @@ if uploaded_file:
 
         full_text += text + " "
 
-        # Section detection (basic)
         if text.isupper() or text.endswith(":"):
             current_section = text
             sections.append({"section_name": current_section, "content": ""})
@@ -130,54 +130,69 @@ if uploaded_file:
             if current_section:
                 sections[-1]["content"] += text + " "
 
-        # ✅Better requirement extraction
-        if any(keyword in text.lower() for keyword in ["shall", "must", "should", "will"]):
+        if any(k in text.lower() for k in ["shall", "must", "should", "will"]):
             requirements.append(text)
 
-        # Feature detection
         if "feature" in text.lower():
             features.append(text)
 
-    # Running Enhancer
     enhanced = enhancer.enhance(full_text)
     clean_text = enhanced["clean_text"]
 
-    # Running FPR
     fpr_result = run_fpr_pipeline(requirements) if requirements else {
         "clusters": [], "keywords": {}, "metrics": {}
     }
 
-    # Dummy test results
+    # Test Cases
+    test_cases = generate_test_cases(requirements)
+
+    # ✅ Safety fix (prevents crash)
+    for i, tc in enumerate(test_cases):
+        tc.setdefault("id", f"TC_AUTO_{i}")
+        tc.setdefault("technique", "Unknown")
+        tc.setdefault("requirement", "N/A")
+        tc.setdefault("input", "N/A")
+        tc.setdefault("expected", "N/A")
+
+    # Dummy Test Results
     test_results = {
         "test_requirement_extraction": "PASSED",
         "test_testcase_generation": "PASSED",
         "test_srs_upload": "PASSED"
     }
 
-    # Saving JSON
+    # Saving as a json file
     output_json = os.path.join(RESULTS_FOLDER, f"{srs_filename}.json")
     with open(output_json, "w", encoding="utf-8") as f:
         json.dump({
             "sections": sections,
             "requirements": requirements,
             "features": features,
+            "test_cases": test_cases,
             "clean_text": clean_text,
             "fpr": fpr_result,
             "test_results": test_results
         }, f, indent=4)
 
-    # Saving DB
     doc_id = insert_into_db(srs_filename, sections, requirements, features, test_results, fpr_result)
     st.success(f"💾 Data saved to database with doc_id {doc_id}")
 
-    # 🔥 Metrics Dashboard
-    col1, col2, col3 = st.columns(3)
+    # METRICS
+    col1, col2, col3, col4 = st.columns(4)
     col1.metric("📌 Requirements", len(requirements))
     col2.metric("✨ Features", len(features))
     col3.metric("🧠 Clusters", len(set(fpr_result["clusters"])))
+    col4.metric("🧪 Test Cases", len(test_cases))
 
-    # Tabs
-    tabs = st.tabs(["📄 Sections", "📌 Requirements", "✨ Features", "🧠 FPR", "📊 Analytics"])
+    # TABS 
+    tabs = st.tabs([
+        "📄 Sections",
+        "📌 Requirements",
+        "✨ Features",
+        "🧠 FPR",
+        "🧪 Test Cases",
+        "📊 Analytics"
+    ])
 
     # Sections
     with tabs[0]:
@@ -192,40 +207,48 @@ if uploaded_file:
         for r in filtered:
             st.markdown(f"- {r}")
 
-        if st.button("Export CSV"):
-            df = pd.DataFrame({"requirements": filtered})
-            path = os.path.join(RESULTS_FOLDER, f"{srs_filename}_reqs.csv")
-            df.to_csv(path, index=False)
-            st.success(f"Saved: {path}")
-
     # Features
     with tabs[2]:
         for i, f in enumerate(features, 1):
             with st.expander(f"Feature {i}"):
                 st.write(f)
 
-    # ✅Proper FPR visualization
+    # FPR
     with tabs[3]:
-        clusters = fpr_result["clusters"]
-        keywords = fpr_result["keywords"]
-
         cluster_map = {}
-        for req, label in zip(requirements, clusters):
+        for req, label in zip(requirements, fpr_result["clusters"]):
             cluster_map.setdefault(label, []).append(req)
 
-        for cluster_id, reqs in cluster_map.items():
-            with st.expander(f"Cluster {cluster_id}"):
-                st.write("📌 Requirements:")
+        for cid, reqs in cluster_map.items():
+            with st.expander(f"Cluster {cid}"):
                 for r in reqs:
                     st.markdown(f"- {r}")
-
-                st.write("🔑 Keywords:")
-                st.write(keywords.get(str(cluster_id), []))
+                st.write("Keywords:", fpr_result["keywords"].get(str(cid), []))
 
         st.json(fpr_result["metrics"])
 
-    # Analytics
+    # Test Cases UI
     with tabs[4]:
+        st.subheader("🧪 Generated Test Cases")
+        st.write(f"Total Test Cases: {len(test_cases)}")
+
+        if not test_cases:
+            st.warning("No test cases generated.")
+        else:
+            for tc in test_cases[:100]:
+                with st.expander(f"{tc['id']} | {tc['technique']}"):
+                    st.write("📌 Requirement:", tc["requirement"])
+                    st.write("🔹 Input:", tc["input"])
+                    st.write("✅ Expected:", tc["expected"])
+
+        if st.button("Export Test Cases CSV"):
+            df = pd.DataFrame(test_cases)
+            path = os.path.join(RESULTS_FOLDER, f"{srs_filename}_testcases.csv")
+            df.to_csv(path, index=False)
+            st.success(f"Saved: {path}")
+
+    # Analytics
+    with tabs[5]:
         total = len(test_results)
         passed = len([x for x in test_results.values() if x == "PASSED"])
         failed = total - passed
