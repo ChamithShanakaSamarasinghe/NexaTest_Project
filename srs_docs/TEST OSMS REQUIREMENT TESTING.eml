@@ -1,0 +1,26 @@
+MIME-Version: 1.0
+Date: Wed, 8 Apr 2026 10:28:26 +0530
+Message-ID: <CA+e5_aoky1wyXLxQXdGSCbMaLxjWACM-iNiGq=tkm4BVjbYWmQ@mail.gmail.com>
+Subject: TEST OSMS REQUIREMENT TESTING
+From: Chamith Samarasinghe <shanakasamarasinhe@gmail.com>
+To: Shanaka Samarasinhe <shanakaifel@gmail.com>
+Content-Type: multipart/alternative; boundary="00000000000015c8da064eebc049"
+
+--00000000000015c8da064eebc049
+Content-Type: text/plain; charset="UTF-8"
+
+Hi Team,
+
+The system shall allow students to register online.
+The system shall send confirmation emails after registration.
+The system must store student data securely.
+
+Thanks,
+Chamith Shanaka Samarasinghe
+
+--00000000000015c8da064eebc049
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr">Hi Team,<br><br>The system shall allow students to register online.<br>The system shall send confirmation emails after registration.<br>The system must store student data securely.<br><br>Thanks,<br>Chamith Shanaka Samarasinghe</div>
+
+--00000000000015c8da064eebc049--

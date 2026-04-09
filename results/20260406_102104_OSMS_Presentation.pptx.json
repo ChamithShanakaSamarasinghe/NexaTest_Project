@@ -1,0 +1,587 @@
+{
+    "sections": [],
+    "requirements": [
+        "The system shall support online student management system (osms)",
+        "The system shall support introduction - purpose",
+        "The system shall support introduction - scope",
+        "The system shall support functional requirements - auth",
+        "The system shall support student information management",
+        "The system shall support reporting & notifications",
+        "The system shall support non-functional - performance",
+        "The system shall support usability & reliability",
+        "The system shall support assumptions & dependencies"
+    ],
+    "features": [
+        "[PPT_INPUT] Online Student Management System (OSMS)",
+        "[PPT_INPUT] Student Information Management",
+        "[PPT_INPUT] Course Management",
+        "[PPT_INPUT] System Constraints"
+    ],
+    "test_cases": [
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_1_1",
+            "requirement": "The system shall support online student management system (osms)"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_1_2",
+            "requirement": "The system shall support online student management system (osms)"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_1_3",
+            "requirement": "The system shall support online student management system (osms)"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_1_4",
+            "requirement": "The system shall support online student management system (osms)"
+        },
+        {
+            "id": "TC_1_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support online student management system (osms)",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_1_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support online student management system (osms)",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_1_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support online student management system (osms)",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_1_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support online student management system (osms)",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_2_1",
+            "requirement": "The system shall support introduction - purpose"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_2_2",
+            "requirement": "The system shall support introduction - purpose"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_2_3",
+            "requirement": "The system shall support introduction - purpose"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_2_4",
+            "requirement": "The system shall support introduction - purpose"
+        },
+        {
+            "id": "TC_2_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support introduction - purpose",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_2_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support introduction - purpose",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_2_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support introduction - purpose",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_2_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support introduction - purpose",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_3_1",
+            "requirement": "The system shall support introduction - scope"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_3_2",
+            "requirement": "The system shall support introduction - scope"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_3_3",
+            "requirement": "The system shall support introduction - scope"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_3_4",
+            "requirement": "The system shall support introduction - scope"
+        },
+        {
+            "id": "TC_3_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support introduction - scope",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_3_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support introduction - scope",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_3_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support introduction - scope",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_3_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support introduction - scope",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_4_1",
+            "requirement": "The system shall support functional requirements - auth"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_4_2",
+            "requirement": "The system shall support functional requirements - auth"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_4_3",
+            "requirement": "The system shall support functional requirements - auth"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_4_4",
+            "requirement": "The system shall support functional requirements - auth"
+        },
+        {
+            "id": "TC_4_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support functional requirements - auth",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_4_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support functional requirements - auth",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_4_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support functional requirements - auth",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_4_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support functional requirements - auth",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_5_1",
+            "requirement": "The system shall support student information management"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_5_2",
+            "requirement": "The system shall support student information management"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_5_3",
+            "requirement": "The system shall support student information management"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_5_4",
+            "requirement": "The system shall support student information management"
+        },
+        {
+            "id": "TC_5_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support student information management",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_5_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support student information management",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_5_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support student information management",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_5_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support student information management",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_6_1",
+            "requirement": "The system shall support reporting & notifications"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_6_2",
+            "requirement": "The system shall support reporting & notifications"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_6_3",
+            "requirement": "The system shall support reporting & notifications"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_6_4",
+            "requirement": "The system shall support reporting & notifications"
+        },
+        {
+            "id": "TC_6_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support reporting & notifications",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_6_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support reporting & notifications",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_6_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support reporting & notifications",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_6_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support reporting & notifications",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_7_1",
+            "requirement": "The system shall support non-functional - performance"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_7_2",
+            "requirement": "The system shall support non-functional - performance"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_7_3",
+            "requirement": "The system shall support non-functional - performance"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_7_4",
+            "requirement": "The system shall support non-functional - performance"
+        },
+        {
+            "id": "TC_7_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support non-functional - performance",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_7_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support non-functional - performance",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_7_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support non-functional - performance",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_7_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support non-functional - performance",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_8_1",
+            "requirement": "The system shall support usability & reliability"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_8_2",
+            "requirement": "The system shall support usability & reliability"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_8_3",
+            "requirement": "The system shall support usability & reliability"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_8_4",
+            "requirement": "The system shall support usability & reliability"
+        },
+        {
+            "id": "TC_8_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support usability & reliability",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_8_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support usability & reliability",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_8_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support usability & reliability",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_8_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support usability & reliability",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_9_1",
+            "requirement": "The system shall support assumptions & dependencies"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_9_2",
+            "requirement": "The system shall support assumptions & dependencies"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_9_3",
+            "requirement": "The system shall support assumptions & dependencies"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_9_4",
+            "requirement": "The system shall support assumptions & dependencies"
+        },
+        {
+            "id": "TC_9_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "The system shall support assumptions & dependencies",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_9_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support assumptions & dependencies",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_9_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "The system shall support assumptions & dependencies",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_9_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "The system shall support assumptions & dependencies",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        }
+    ],
+    "clean_text": "[ppt_input] online student management system (osms) [ppt_input] introduction - purpose [ppt_input] introduction - scope [ppt_input] definitions [ppt_input] overall description [ppt_input] product functions [ppt_input] user classes [ppt_input] functional requirements - auth [ppt_input] student information management [ppt_input] course management [ppt_input] academic records [ppt_input] reporting & notifications [ppt_input] non-functional - performance [ppt_input] security requirements [ppt_input] usability & reliability [ppt_input] system constraints [ppt_input] assumptions & dependencies [ppt_input] future enhancements",
+    "fpr": {
+        "clusters": [
+            2,
+            4,
+            4,
+            0,
+            2,
+            1,
+            0,
+            3,
+            1
+        ],
+        "keywords": {
+            "0": [
+                "shall",
+                "functional",
+                "support",
+                "non",
+                "auth"
+            ],
+            "1": [
+                "shall",
+                "support",
+                "assumptions",
+                "notifications",
+                "dependencies"
+            ],
+            "2": [
+                "student",
+                "shall",
+                "management",
+                "support",
+                "osms"
+            ],
+            "3": [
+                "usability",
+                "shall",
+                "reliability",
+                "support",
+                "notifications"
+            ],
+            "4": [
+                "shall",
+                "introduction",
+                "support",
+                "scope",
+                "purpose"
+            ]
+        },
+        "metrics": {
+            "silhouette_score": 0.14613651168878247,
+            "total_requirements": 9,
+            "total_clusters": 5
+        }
+    },
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}

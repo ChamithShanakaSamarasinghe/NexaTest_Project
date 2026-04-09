@@ -1,0 +1,17 @@
+{
+    "sections": [],
+    "requirements": [],
+    "features": [],
+    "test_cases": [],
+    "clean_text": "online student management system (osms) introduction - purpose introduction - scope definitions overall description product functions user classes functional requirements - auth student information management course management academic records reporting & notifications non-functional - performance security requirements usability & reliability system constraints assumptions & dependencies future enhancements",
+    "fpr": {
+        "clusters": [],
+        "keywords": {},
+        "metrics": {}
+    },
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}

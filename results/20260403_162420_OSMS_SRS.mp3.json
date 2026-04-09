@@ -1,0 +1,879 @@
+{
+    "sections": [],
+    "requirements": [
+        "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access",
+        "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge",
+        "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements",
+        "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC",
+        "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database",
+        "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses",
+        "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students",
+        "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements",
+        "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users",
+        "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles",
+        "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users",
+        "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss",
+        "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies"
+    ],
+    "features": [
+        "[AUDIO_INPUT] This SRS is also used as an input document for SRS segmentation and software feature extraction, where requirements are analyzed, classified, and prepared for training intelligent systems."
+    ],
+    "test_cases": [
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_1_1",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_1_2",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_1_3",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_1_4",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access"
+        },
+        {
+            "id": "TC_1_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_1_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_1_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_1_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_2_1",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_2_2",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_2_3",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_2_4",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge"
+        },
+        {
+            "id": "TC_2_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_2_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_2_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_2_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Operating Environment the system shall operate on Linux-based servers and shall be accessible through modern web browsers such as Google Chrome, Mozilla Firefox, and Microsoft Edge",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_3_1",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_3_2",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_3_3",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_3_4",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements"
+        },
+        {
+            "id": "TC_3_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_3_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_3_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_3_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Design and Implementation constraints the system must comply with institutional IT policies and data protection regulations Development must follow secure coding standards and best practices 3 Functional Requirements",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "valid email",
+            "expected": "Accepted",
+            "id": "TC_4_1",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid email",
+            "expected": "Rejected",
+            "id": "TC_4_2",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "Valid password",
+            "expected": "Accepted",
+            "id": "TC_4_3",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "empty password",
+            "expected": "Rejected",
+            "id": "TC_4_4",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "7 characters",
+            "expected": "Rejected",
+            "id": "TC_4_5",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "8 characters",
+            "expected": "Accepted",
+            "id": "TC_4_6",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "20 characters",
+            "expected": "Accepted",
+            "id": "TC_4_7",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "21 characters",
+            "expected": "Rejected",
+            "id": "TC_4_8",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "valid email + valid password",
+            "expected": "Success",
+            "id": "TC_4_9",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "invalid email + valid password",
+            "expected": "Error",
+            "id": "TC_4_10",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "valid email + invalid password",
+            "expected": "Error",
+            "id": "TC_4_11",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "invalid email + invalid password",
+            "expected": "Error",
+            "id": "TC_4_12",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC"
+        },
+        {
+            "id": "TC_4_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_4_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_4_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_4_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] User Authentication and Authorization the system shall allow users to register using a valid institutional email address The system shall authenticate users using encrypted credentials The system shall allow users to reset their passwords securely The system shall enforce role-based access control, RVAC",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_5_1",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_5_2",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_5_3",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_5_4",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database"
+        },
+        {
+            "id": "TC_5_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_5_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_5_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_5_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Student Information Management the system shall allow administrators to create student profiles The system shall allow administrators to update student personal and academic information The system shall allow administrators to delete student records when required The system shall persist student records in a centralized database",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_6_1",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_6_2",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_6_3",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_6_4",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses"
+        },
+        {
+            "id": "TC_6_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_6_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_6_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_6_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Course Management the system shall allow lecturers to create and update course information The system shall allow administrators to assign lecturers to courses The system shall allow students to enroll in available courses",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_7_1",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_7_2",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_7_3",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_7_4",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students"
+        },
+        {
+            "id": "TC_7_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_7_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_7_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_7_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Academic Records and grading the system shall allow lecturers to submit grades for enrolled students The system shall allow lecturers to update submitted grades before finalization The system shall calculate grade point averages automatically The system shall generate academic performance reports for students",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "valid email",
+            "expected": "Accepted",
+            "id": "TC_8_1",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid email",
+            "expected": "Rejected",
+            "id": "TC_8_2",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_8_3",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_8_4",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_8_5",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements"
+        },
+        {
+            "id": "TC_8_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_8_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_8_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_8_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Reporting and notifications the system shall generate reports in PDF format The system shall notify students via email when grades are published The system shall log report generation activities for audit purposes For non-functional requirements",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_9_1",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_9_2",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_9_3",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_9_4",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users"
+        },
+        {
+            "id": "TC_9_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_9_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_9_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_9_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Performance requirements the system shall respond to user requests within two seconds under normal operating conditions The system shall support concurrent access by at least 500 users",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_10_1",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_10_2",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_10_3",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_10_4",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles"
+        },
+        {
+            "id": "TC_10_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_10_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_10_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_10_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Security requirements the system shall encrypt sensitive data at rest and intranset The system shall log all authentication and authorization attempts The system shall restrict access to system resources based on user roles",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_11_1",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_11_2",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_11_3",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_11_4",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users"
+        },
+        {
+            "id": "TC_11_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_11_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_11_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_11_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Usability requirements the system shall provide a user-friendly interface The system shall be accessible to non-technical users",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_12_1",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_12_2",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_12_3",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_12_4",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss"
+        },
+        {
+            "id": "TC_12_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_12_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_12_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_12_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] Reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance The system shall recover from failures without data loss",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid input",
+            "expected": "Failure",
+            "id": "TC_13_1",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_13_2",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies"
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_13_3",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies"
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_13_4",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies"
+        },
+        {
+            "id": "TC_13_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_13_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_13_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_13_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[AUDIO_INPUT] System constraints the system must be developed using web-based technologies The system must be hosted on Linux-based servers The system must comply with institutional data protection policies",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        }
+    ],
+    "clean_text": "[audio_input] software requirements specification, srs, online student management system, osms, 1. [audio_input] introduction [audio_input] purpose the software requirements specification, srs, document provides a detailed description of the functional and non-functional requirements of the online student management system, osms. [audio_input] the document is intended to serve as a reference for software developers, system architects, quality assurance engineers, and researchers involved in requirement analysis and training-based system modeling. [audio_input] this srs is also used as an input document for srs segmentation and software feature extraction, where requirements are analyzed, classified, and prepared for training intelligent systems. [audio_input] scope the online student management system, osms is a web-based application designed to automate and manage academic and administrative operations of an educational institution. [audio_input] the system facilitates student registration, course enrollment, grade management, and academic reporting while ensuring secure and controlled access to system resources. [audio_input] the osms aims to improve data accuracy, reduce manual workload, and provide timely access to academic information for administrators, lecturers, and students. [audio_input] definitions, acronyms, and abbreviations term osms-srsrbacrad description online student management system software requirements specification role-based access control create, read, update, delete [audio_input] intended audience this document is intended for software developers implementing the system system analyst's validating requirements testers designing test cases researchers performing requirements segmentation and training-based analysis 2. [audio_input] overall description [audio_input] product perspective the osms is implemented as a client server web application following a three-tier architecture, consisting of presentation layer, web ui, application layer, business logic, data layer, relational database, the system integrates with external services such as email notification systems and authentication services [audio_input] product functions at a high level, the system provides the following functions, user authentication and authorization student profile management course and enrollment management academic grading and reporting role-based access control [audio_input] user classes and characteristics user class description administrator manages system configuration, users, and institutional data lecturer manages courses, student grades, and reports student views academic records and enrolled courses users are expected to have basic computer literacy and internet access [audio_input] operating environment the system shall operate on linux-based servers and shall be accessible through modern web browsers such as google chrome, mozilla firefox, and microsoft edge [audio_input] design and implementation constraints the system must comply with institutional it policies and data protection regulations development must follow secure coding standards and best practices 3 functional requirements [audio_input] user authentication and authorization the system shall allow users to register using a valid institutional email address the system shall authenticate users using encrypted credentials the system shall allow users to reset their passwords securely the system shall enforce role-based access control, rvac [audio_input] student information management the system shall allow administrators to create student profiles the system shall allow administrators to update student personal and academic information the system shall allow administrators to delete student records when required the system shall persist student records in a centralized database [audio_input] course management the system shall allow lecturers to create and update course information the system shall allow administrators to assign lecturers to courses the system shall allow students to enroll in available courses [audio_input] academic records and grading the system shall allow lecturers to submit grades for enrolled students the system shall allow lecturers to update submitted grades before finalization the system shall calculate grade point averages automatically the system shall generate academic performance reports for students [audio_input] reporting and notifications the system shall generate reports in pdf format the system shall notify students via email when grades are published the system shall log report generation activities for audit purposes for non-functional requirements [audio_input] performance requirements the system shall respond to user requests within two seconds under normal operating conditions the system shall support concurrent access by at least 500 users [audio_input] security requirements the system shall encrypt sensitive data at rest and intranset the system shall log all authentication and authorization attempts the system shall restrict access to system resources based on user roles [audio_input] usability requirements the system shall provide a user-friendly interface the system shall be accessible to non-technical users [audio_input] reliability and availability the system shall maintain an uptime of 99% excluding scheduled maintenance the system shall recover from failures without data loss [audio_input] system constraints the system must be developed using web-based technologies the system must be hosted on linux-based servers the system must comply with institutional data protection policies [audio_input] assumptions and dependencies it is assumed that users have continuous internet connectivity the system depends on third-party email services for notifications the system assumes availability of institutional authentication services 7.future enhancements future versions of the system may include mobile application support advanced analytics dashboards integration with learning management systems",
+    "fpr": {
+        "clusters": [
+            2,
+            1,
+            0,
+            1,
+            3,
+            4,
+            4,
+            1,
+            1,
+            1,
+            1,
+            1,
+            0
+        ],
+        "keywords": {
+            "0": [
+                "audio_input",
+                "institutional",
+                "protection",
+                "policies",
+                "constraints"
+            ],
+            "1": [
+                "shall",
+                "audio_input",
+                "users",
+                "user",
+                "requirements"
+            ],
+            "2": [
+                "user",
+                "users",
+                "student",
+                "manages",
+                "courses"
+            ],
+            "3": [
+                "student",
+                "shall",
+                "allow",
+                "administrators",
+                "information"
+            ],
+            "4": [
+                "shall",
+                "allow",
+                "lecturers",
+                "students",
+                "grades"
+            ]
+        },
+        "metrics": {
+            "silhouette_score": 0.0855958040162462,
+            "total_requirements": 13,
+            "total_clusters": 5
+        }
+    },
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}

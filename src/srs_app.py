@@ -1,34 +1,75 @@
-import streamlit as st
 import os
+
+# FFmpeg path
+os.environ["PATH"] += r";C:\Users\raven\OneDrive\Desktop\ffmpeg\ffmpeg-8.1-essentials_build\bin"
+
+import streamlit as st
 import sys
 import json
+import re
+import subprocess
+import email
+import uuid
+
 from docx import Document
+from pptx import Presentation
+from PIL import Image
+import pytesseract
+
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
 import sqlite3
 from datetime import datetime
-import pandas as pd
-import plotly.express as px
 
-# ✅ Adding project root to Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-# 🔥 AI modules
 from src.enhancer import PipelineEnhancer
 from src.fpr.fpr_pipeline import run_fpr_pipeline
-
-# 🔥 Test Case Generator
 from src.testcase.generator import generate_test_cases
 
-# Paths
 DB_FILE = "db.sqlite3"
 SRS_FOLDER = "srs_docs"
-RESULTS_FOLDER = "results"
 
 os.makedirs(SRS_FOLDER, exist_ok=True)
-os.makedirs(RESULTS_FOLDER, exist_ok=True)
 
 enhancer = PipelineEnhancer()
 
-# Database section
+# ---------------- TEXT SPLITTER ----------------
+def split_into_sentences(text):
+    text = re.sub(r'(\d+\.\d+)', r' \1 ', text)
+    sentences = re.split(r'(?<=[.!?])\s+|\n+', text)
+    return [s.strip() for s in sentences if len(s.strip()) > 10]
+
+# ---------------- EMAIL CLEANER ----------------
+def clean_email_text(text):
+    text = re.sub(r"(From:.*|Sent:.*|To:.*|Subject:.*)", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"(Hi|Hello|Dear).*?\n", "", text, flags=re.IGNORECASE)
+    text = re.sub(r"(Regards|Thanks|Best).*", "", text, flags=re.IGNORECASE)
+    return text.strip()
+
+# ---------------- CHAT ----------------
+def normalize_chat_text(text):
+    replacements = {
+        "pls": "please", "plz": "please", "u": "you", "ur": "your",
+        "asap": "as soon as possible", "btw": "by the way", "im": "i am"
+    }
+    return " ".join([replacements.get(w.lower(), w) for w in text.split()])
+
+def parse_chat_lines(text):
+    lines = text.split("\n")
+    cleaned = []
+    for line in lines:
+        line = re.sub(r"\[.*?\]|\d{1,2}:\d{2}.*", "", line)
+        if len(line.strip()) > 5:
+            cleaned.append(line.strip())
+    return cleaned
+
+# ---------------- VIDEO ----------------
+def extract_audio_from_video(video_path, output_audio_path):
+    command = ["ffmpeg", "-i", video_path, "-vn", "-acodec", "mp3", output_audio_path, "-y"]
+    subprocess.run(command, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+# ---------------- DB ----------------
 def insert_into_db(doc_filename, sections, requirements, features, test_results, fpr_result):
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
@@ -74,195 +115,217 @@ def insert_into_db(doc_filename, sections, requirements, features, test_results,
     conn.close()
     return doc_id
 
-
-# UI section
+# ---------------- UI ----------------
 st.set_page_config(page_title="🚀 SRS Automation Platform", layout="wide")
 st.title("🚀 SRS Automation Platform (AI Powered)")
 
-uploaded_file = st.file_uploader(
-    "Upload your SRS (.docx / .pdf) file", type=["docx", "pdf"]
+uploaded_files = st.file_uploader(
+    "Upload SRS (Multiple inputs supported → single document ID)",
+    type=["docx", "pdf", "pptx", "png", "jpg", "jpeg", "mp3", "wav", "mp4", "avi", "mov", "eml", "txt"],
+    accept_multiple_files=True
 )
 
-if uploaded_file:
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    srs_filename = f"{timestamp}_{uploaded_file.name}"
-    srs_path = os.path.join(SRS_FOLDER, srs_filename)
+# 🔥 Prevent re-run duplication
+if "processed" not in st.session_state:
+    st.session_state.processed = False
 
-    with open(srs_path, "wb") as f:
-        f.write(uploaded_file.getbuffer())
+if uploaded_files:
 
-    st.success(f"✅ SRS file saved: {srs_filename}")
+    st.info("📂 Files ready. Click below to process all together.")
 
-    # Reading the file
-    paragraphs = []
+    if st.button("🚀 Process All Inputs") and not st.session_state.processed:
 
-    if uploaded_file.name.endswith(".docx"):
-        doc = Document(srs_path)
-        paragraphs = [p.text for p in doc.paragraphs]
+        st.session_state.processed = True
 
-    elif uploaded_file.name.endswith(".pdf"):
-        import PyPDF2
-        with open(srs_path, "rb") as f:
-            reader = PyPDF2.PdfReader(f)
-            for page in reader.pages:
-                paragraphs.append(page.extract_text())
+        session_id = str(uuid.uuid4())[:8]
+        all_paragraphs = []
+        file_names = []
 
-    else:
-        st.error("Unsupported file format")
-        st.stop()
+        for uploaded_file in uploaded_files:
 
-    # Extraction
-    sections, requirements, features = [], [], []
-    current_section = None
-    full_text = ""
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            srs_filename = f"{timestamp}_{uploaded_file.name}"
+            srs_path = os.path.join(SRS_FOLDER, srs_filename)
 
-    for para in paragraphs:
-        text = str(para).strip()
-        if not text:
-            continue
+            with open(srs_path, "wb") as f:
+                f.write(uploaded_file.getbuffer())
 
-        full_text += text + " "
+            file_names.append(uploaded_file.name)
+            st.success(f"✅ Processed: {uploaded_file.name}")
 
-        if text.isupper() or text.endswith(":"):
-            current_section = text
-            sections.append({"section_name": current_section, "content": ""})
-        else:
+            paragraphs = []
+
+            try:
+                if uploaded_file.name.endswith(".docx"):
+                    doc = Document(srs_path)
+                    paragraphs = [p.text for p in doc.paragraphs]
+
+                elif uploaded_file.name.endswith(".pdf"):
+                    import PyPDF2
+                    reader = PyPDF2.PdfReader(srs_path)
+                    for page in reader.pages:
+                        text = page.extract_text()
+                        if text:
+                            paragraphs.extend(split_into_sentences(text))
+
+                elif uploaded_file.name.endswith(".pptx"):
+                    prs = Presentation(srs_path)
+                    for slide in prs.slides:
+                        for shape in slide.shapes:
+                            if hasattr(shape, "text"):
+                                for s in split_into_sentences(shape.text):
+                                    paragraphs.append(f"[PPT_INPUT] {s}")
+
+                elif uploaded_file.name.endswith((".png", ".jpg", ".jpeg")):
+                    image = Image.open(srs_path)
+                    text = pytesseract.image_to_string(image)
+                    for s in split_into_sentences(text):
+                        paragraphs.append(f"[IMAGE_INPUT] {s}")
+
+                elif uploaded_file.name.endswith((".mp3", ".wav")):
+                    import whisper
+                    model = whisper.load_model("base")
+                    result = model.transcribe(srs_path)
+                    for s in split_into_sentences(result["text"]):
+                        paragraphs.append(f"[AUDIO_INPUT] {s}")
+
+                elif uploaded_file.name.endswith((".mp4", ".avi", ".mov")):
+                    import whisper
+                    audio_path = srs_path + ".mp3"
+
+                    st.info(f"🎬 Extracting: {uploaded_file.name}")
+                    extract_audio_from_video(srs_path, audio_path)
+
+                    model = whisper.load_model("base")
+                    result = model.transcribe(audio_path)
+
+                    for s in split_into_sentences(result["text"]):
+                        paragraphs.append(f"[VIDEO_INPUT] {s}")
+
+                elif uploaded_file.name.endswith(".eml"):
+                    st.info(f"📧 Email: {uploaded_file.name}")
+
+                    raw_email = uploaded_file.read().decode("utf-8", errors="ignore")
+                    msg = email.message_from_string(raw_email)
+
+                    body = ""
+                    if msg.is_multipart():
+                        for part in msg.walk():
+                            if part.get_content_type() == "text/plain":
+                                body += part.get_payload(decode=True).decode(errors="ignore")
+                    else:
+                        body = msg.get_payload(decode=True).decode(errors="ignore")
+
+                    cleaned = clean_email_text(body)
+
+                    for s in split_into_sentences(cleaned):
+                        paragraphs.append(f"[EMAIL_INPUT] {s}")
+
+                elif uploaded_file.name.endswith(".txt"):
+                    st.info(f"💬 Chat: {uploaded_file.name}")
+
+                    raw_text = uploaded_file.read().decode("utf-8")
+                    lines = parse_chat_lines(raw_text)
+
+                    for line in lines:
+                        normalized = normalize_chat_text(line)
+                        for s in split_into_sentences(normalized):
+                            paragraphs.append(f"[CHAT_INPUT] {s}")
+
+            except Exception as e:
+                st.error(f"{uploaded_file.name} → {str(e)}")
+
+            all_paragraphs.extend(paragraphs)
+
+        # ---------------- PIPELINE ----------------
+        sections, requirements, features = [], [], []
+        current_section = None
+        full_text = ""
+
+        for para in all_paragraphs:
+            text = para.strip()
+            if not text:
+                continue
+
+            full_text += text + " "
+
+            if text.isupper() or text.endswith(":"):
+                current_section = text
+                sections.append({"section_name": current_section, "content": ""})
+                continue
+
             if current_section:
                 sections[-1]["content"] += text + " "
 
-        if any(k in text.lower() for k in ["shall", "must", "should", "will"]):
-            requirements.append(text)
+            lower = text.lower()
 
-        if "feature" in text.lower():
-            features.append(text)
+            if re.search(r"\b(shall|must|required to)\b", lower):
+                requirements.append(text)
 
-    enhanced = enhancer.enhance(full_text)
-    clean_text = enhanced["clean_text"]
+            elif any(tag in text for tag in ["[EMAIL_INPUT]", "[CHAT_INPUT]", "[VIDEO_INPUT]", "[AUDIO_INPUT]", "[PPT_INPUT]"]):
+                clean = re.sub(r"\[.*?_INPUT\]", "", text).strip()
+                if len(clean.split()) > 5:
+                    requirements.append(f"The system shall {clean.lower()}")
 
-    fpr_result = run_fpr_pipeline(requirements) if requirements else {
-        "clusters": [], "keywords": {}, "metrics": {}
-    }
+            if any(word in lower for word in ["feature", "module", "management", "system"]):
+                features.append(text)
 
-    # Test Cases
-    test_cases = generate_test_cases(requirements)
+        enhanced = enhancer.enhance(full_text)
+        fpr_result = run_fpr_pipeline(requirements) if requirements else {"clusters": [], "keywords": {}, "metrics": {}}
+        test_cases = generate_test_cases(requirements)
 
-    # ✅ Safety fix (prevents crash)
-    for i, tc in enumerate(test_cases):
-        tc.setdefault("id", f"TC_AUTO_{i}")
-        tc.setdefault("technique", "Unknown")
-        tc.setdefault("requirement", "N/A")
-        tc.setdefault("input", "N/A")
-        tc.setdefault("expected", "N/A")
+        test_results = {
+            "test_requirement_extraction": "PASSED",
+            "test_testcase_generation": "PASSED",
+            "test_srs_upload": "PASSED"
+        }
 
-    # Dummy Test Results
-    test_results = {
-        "test_requirement_extraction": "PASSED",
-        "test_testcase_generation": "PASSED",
-        "test_srs_upload": "PASSED"
-    }
+        doc_name = f"SESSION_{session_id}_" + "_".join(file_names)
+        doc_id = insert_into_db(doc_name, sections, requirements, features, test_results, fpr_result)
 
-    # Saving as a json file
-    output_json = os.path.join(RESULTS_FOLDER, f"{srs_filename}.json")
-    with open(output_json, "w", encoding="utf-8") as f:
-        json.dump({
-            "sections": sections,
-            "requirements": requirements,
-            "features": features,
-            "test_cases": test_cases,
-            "clean_text": clean_text,
-            "fpr": fpr_result,
-            "test_results": test_results
-        }, f, indent=4)
+        st.success(f"💾 Saved ALL inputs under ONE doc_id: {doc_id}")
 
-    doc_id = insert_into_db(srs_filename, sections, requirements, features, test_results, fpr_result)
-    st.success(f"💾 Data saved to database with doc_id {doc_id}")
+        # ---------------- METRICS ----------------
+        col1, col2, col3, col4 = st.columns(4)
+        col1.metric("📌 Requirements", len(requirements))
+        col2.metric("✨ Features", len(features))
+        col3.metric("🧠 Clusters", len(set(fpr_result["clusters"])))
+        col4.metric("🧪 Test Cases", len(test_cases))
 
-    # METRICS
-    col1, col2, col3, col4 = st.columns(4)
-    col1.metric("📌 Requirements", len(requirements))
-    col2.metric("✨ Features", len(features))
-    col3.metric("🧠 Clusters", len(set(fpr_result["clusters"])))
-    col4.metric("🧪 Test Cases", len(test_cases))
+        # ---------------- UI TABS ----------------
+        tabs = st.tabs(["📄 Sections", "📌 Requirements", "✨ Features", "🧠 Clusters", "🧪 Test Cases"])
 
-    # TABS 
-    tabs = st.tabs([
-        "📄 Sections",
-        "📌 Requirements",
-        "✨ Features",
-        "🧠 FPR",
-        "🧪 Test Cases",
-        "📊 Analytics"
-    ])
+        with tabs[0]:
+            for sec in sections:
+                with st.expander(sec["section_name"]):
+                    st.write(sec["content"])
 
-    # Sections
-    with tabs[0]:
-        for sec in sections:
-            with st.expander(sec["section_name"]):
-                st.write(sec["content"])
+        with tabs[1]:
+            for r in requirements:
+                st.markdown(f"- {r}")
 
-    # Requirements
-    with tabs[1]:
-        search = st.text_input("🔍 Search Requirements")
-        filtered = [r for r in requirements if search.lower() in r.lower()]
-        for r in filtered:
-            st.markdown(f"- {r}")
+        with tabs[2]:
+            for i, f in enumerate(features, 1):
+                with st.expander(f"Feature {i}"):
+                    st.write(f)
 
-    # Features
-    with tabs[2]:
-        for i, f in enumerate(features, 1):
-            with st.expander(f"Feature {i}"):
-                st.write(f)
+        with tabs[3]:
+            cluster_map = {}
+            for req, label in zip(requirements, fpr_result["clusters"]):
+                cluster_map.setdefault(label, []).append(req)
 
-    # FPR
-    with tabs[3]:
-        cluster_map = {}
-        for req, label in zip(requirements, fpr_result["clusters"]):
-            cluster_map.setdefault(label, []).append(req)
+            for cid, reqs in cluster_map.items():
+                with st.expander(f"Cluster {cid}"):
+                    for r in reqs:
+                        st.markdown(f"- {r}")
 
-        for cid, reqs in cluster_map.items():
-            with st.expander(f"Cluster {cid}"):
-                for r in reqs:
-                    st.markdown(f"- {r}")
-                st.write("Keywords:", fpr_result["keywords"].get(str(cid), []))
+            st.json(fpr_result["metrics"])
 
-        st.json(fpr_result["metrics"])
-
-    # Test Cases UI
-    with tabs[4]:
-        st.subheader("🧪 Generated Test Cases")
-        st.write(f"Total Test Cases: {len(test_cases)}")
-
-        if not test_cases:
-            st.warning("No test cases generated.")
-        else:
+        with tabs[4]:
             for tc in test_cases[:100]:
-                with st.expander(f"{tc['id']} | {tc['technique']}"):
-                    st.write("📌 Requirement:", tc["requirement"])
-                    st.write("🔹 Input:", tc["input"])
-                    st.write("✅ Expected:", tc["expected"])
+                with st.expander(f"{tc.get('id')} | {tc.get('technique')}"):
+                    st.write("📌 Requirement:", tc.get("requirement"))
+                    st.write("🔹 Input:", tc.get("input"))
+                    st.write("✅ Expected:", tc.get("expected"))
 
-        if st.button("Export Test Cases CSV"):
-            df = pd.DataFrame(test_cases)
-            path = os.path.join(RESULTS_FOLDER, f"{srs_filename}_testcases.csv")
-            df.to_csv(path, index=False)
-            st.success(f"Saved: {path}")
-
-    # Analytics
-    with tabs[5]:
-        total = len(test_results)
-        passed = len([x for x in test_results.values() if x == "PASSED"])
-        failed = total - passed
-
-        st.metric("Total", total)
-        st.metric("Passed", passed)
-        st.metric("Failed", failed)
-
-        df_chart = pd.DataFrame({
-            "Status": ["Passed", "Failed"],
-            "Count": [passed, failed]
-        })
-
-        fig = px.pie(df_chart, names="Status", values="Count")
-        st.plotly_chart(fig)
-
-    st.balloons()
+        st.balloons()

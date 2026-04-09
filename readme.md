@@ -1,84 +1,146 @@
-## NexaTest
+## NexaTest 🚀
+
+An AI-powered SRS Automation Platform for extracting, analyzing, and generating insights from multi-format requirement sources.
+
+---
 
 ## 🚀 Core Technologies
 
 The platform combines multiple technologies:
 
-- **Streamlit** → Interactive UI for SRS upload and analysis
-- **FastAPI** → Backend API services
-- **Machine Learning** → Requirement classification and feature clustering
-- **LLM Pipeline** → AI-powered requirement analysis
-- **KeyBERT** → Keyword extraction
-- **spaCy NLP** → Named entity recognition
-- **DistilBART** → Text summarization
-- **SQLite** → Persistent database storage
+- **Streamlit** → Interactive UI for SRS upload and visualization  
+- **FastAPI** → Backend API services  
+- **Machine Learning** → Requirement classification & clustering  
+- **LLM Pipeline** → AI-powered requirement analysis  
+- **KeyBERT** → Keyword extraction  
+- **spaCy NLP** → Named entity recognition  
+- **DistilBART** → Text summarization  
+- **Whisper (OpenAI)** → Audio & video transcription  
+- **Tesseract OCR** → Image & handwritten text extraction  
+- **SQLite** → Persistent database storage  
 
-## 📄 Supported SRS Input
+---
 
-NexaTest can process:
+## 📄 Supported SRS Input (MULTI-MODAL 🔥)
 
-- `.docx` SRS documents (Streamlit UI)
-- `.pdf` SRS documents (Extractor pipeline)
+NexaTest now supports **real-world requirement sources**, not just documents:
 
-The system automatically extracts:
+### 📁 Documents
+- `.docx` (Word)
+- `.pdf` (PDF)
+- `.pptx` (PowerPoint)
 
-- Document sections
-- Functional requirements
-- Non-functional requirements
-- System features
+### 🖼️ Images
+- `.png`, `.jpg`, `.jpeg`
+- OCR-based text extraction (Tesseract)
+
+### 🎧 Audio
+- `.mp3`, `.wav`
+- Speech-to-text using Whisper
+
+### 🎬 Video
+- `.mp4`, `.avi`, `.mov`
+- Audio extracted → Transcribed → Processed
+
+### 📧 Emails
+- `.eml`
+- Header removal (From, Subject, etc.)
+- Signature & greeting cleanup
+
+### 💬 Chat / Messaging
+- `.txt`
+- WhatsApp / Messenger-style chat parsing
+- Slang normalization (e.g., *pls → please*)
+
+---
+
+## ⚙️ What the System Automatically Extracts
+
+- 📌 Functional Requirements  
+- 📌 Non-functional Requirements  
+- 📌 System Features  
+- 📌 Sections & Structure  
+- 📌 Keywords & Clusters  
+- 📌 Test Cases (Auto-generated)
+
+---
 
 ## 🧠 AI Requirement Analysis Pipeline
 
-The platform implements an LLM-driven analysis pipeline.
 
-**Flow:**
-
-```
-User Question / Requirement
-        ↓
-LLM Generator
-        ↓
-Raw Model Response
-        ↓
-Response Post-Processor
-        ↓
-Cleaned Response
-        ↓
-Analyzers
-   • Semantic Analyzer
-   • Completeness Analyzer
-   • Safety Analyzer
-        ↓
-Confidence Scorer
-        ↓
-Validation Rules
-        ↓
+Multi-Modal Input (Doc / Audio / Video / Email / Chat)
+↓
+Text Extraction Layer
+↓
+Text Cleaning & Normalization
+↓
+Sentence Splitting
+↓
+Requirement Extraction Engine
+↓
+Feature Detection
+↓
+Embedding Generation
+↓
+FPR Clustering
+↓
+Test Case Generation
+↓
 Database Storage
-        ↓
-Streamlit UI Output
-```
+↓
+Streamlit UI Visualization
 
-This pipeline evaluates the quality and reliability of AI-generated answers.
 
-## 📊 Confidence Scoring System
+---
 
-The confidence score evaluates the reliability of model responses.
+## 🔍 Feature Priority Risk (FPR) Analysis
+
+Capabilities include:
+
+- Requirement clustering
+- Feature mapping
+- Risk identification
+- Priority classification
+- Cluster quality evaluation
+
+**Metrics calculated:**
+
+- Silhouette Score  
+- Cluster similarity  
+- Feature density  
+
+---
+
+## 🧪 Automated Test Case Generation
+
+For each requirement, the system generates:
+
+- Equivalence Partitioning  
+- Boundary Value Analysis  
+- Decision Tables  
+- State Transition Testing  
+- Use Case Testing  
+- Exploratory Testing  
+
+---
+
+## 📊 Confidence Scoring System (LLM Pipeline)
 
 | Metric              | Weight |
 |--------------------|--------|
 | Semantic Similarity | 0.40   |
-| Completeness       | 0.35   |
-| Safety             | 0.25   |
+| Completeness        | 0.35   |
+| Safety              | 0.25   |
 
-**Final Score Formula:**
+**Formula:**
 
-```
+
 Final Score = (0.4 × Semantic) +
-              (0.35 × Completeness) +
-              (0.25 × Safety)
-```
+(0.35 × Completeness) +
+(0.25 × Safety)
 
-**Confidence Bands:**
+
+**Bands:**
 
 | Score  | Band |
 |--------|------|
@@ -87,113 +149,56 @@ Final Score = (0.4 × Semantic) +
 | ≥ 0.50 | C    |
 | < 0.50 | D    |
 
-## 🧹 LLM Response Post-Processing (Task 196)
+---
 
-Functions include:
+## 🧹 LLM Response Post-Processing
 
-- Removing filler phrases
-- Cleaning formatting
-- Normalizing whitespace
-- Improving readability
+Includes:
 
-**Example:**
+- Removing filler phrases  
+- Cleaning formatting  
+- Normalizing whitespace  
+- Improving readability  
 
-**Raw Response**
-
-```
-Sure! Here's the answer:
-Users can reset their password.
-```
-
-**Processed Response**
-
-```
-Users can reset their password.
-```
-
-## 🔍 Feature Priority Risk (FPR) Analysis
-
-Capabilities include:
-
-- Feature clustering
-- Requirement-feature mapping
-- Risk identification
-- Priority classification
-- Cluster quality evaluation
-
-**Metrics calculated:**
-
-- Silhouette Score
-- Cluster similarity
-- Feature density
-
-## 🧾 Automated SRS Extraction Pipeline
-
-Pipeline steps:
-
-```
-SRS PDF
-   ↓
-Text Cleaning
-   ↓
-Section Detection
-   ↓
-Requirement Extraction
-   ↓
-Feature Identification
-   ↓
-Embedding Generation
-   ↓
-FPR Clustering
-   ↓
-Database Storage
-```
+---
 
 ## 💾 Database Architecture
 
-All extracted data is stored in `db.sqlite3`.
+Stored in `db.sqlite3`
 
-**Main tables:**
+| Table             | Description |
+|------------------|------------|
+| documents        | Uploaded files |
+| sections         | Extracted sections |
+| requirements     | Extracted requirements |
+| features         | Identified features |
+| fpr_results      | Clustering results |
+| test_results     | Test execution logs |
 
-| Table               | Description                            |
-|--------------------|----------------------------------------|
-| documents           | Uploaded SRS files                     |
-| sections            | Extracted document sections            |
-| requirements        | Functional & non-functional requirements |
-| features            | Extracted features                     |
-| fpr_results         | Feature priority risk analysis runs    |
-| confidence_scores   | AI response confidence scores          |
+---
 
 ## 📂 Project Structure
 
-```
+
 NexaTest
 │
 ├── src
-│   ├── srs_app.py
-│   ├── fastapi_app.py
-│   ├── db
-│   │   └── insert_requirements.py
-│   ├── llm
-│   │   └── generator.py
-│   └── services
-│       ├── confidence
-│       │   ├── pipeline.py
-│       │   ├── semantic.py
-│       │   ├── completeness.py
-│       │   ├── safety.py
-│       │   ├── scorer.py
-│       │   └── validator.py
-│       └── post_processing
-│           └── post_processor.py
+│ ├── srs_app.py
+│ ├── fastapi_app.py
+│ ├── db
+│ ├── enhancer.py
+│ ├── fpr
+│ ├── testcase
+│ └── services
+│
 ├── srs_docs
-├── test_srs_extractor.py
-├── add_fpr_id_column.py
-├── test_pipeline.py
+├── results
 ├── db.sqlite3
 ├── requirements.txt
 └── README.md
-```
+
+
+---
 
 ## ⚙️ Installation
 
@@ -202,67 +207,50 @@ git clone <your-repository-url>
 cd NexaTest
 
 python -m venv venv
-```
+Activate Environment
 
-Activate environment:
+Windows
 
-**Windows**
-
-```bash
 venv\Scripts\activate
-```
 
-**Mac / Linux**
+Mac / Linux
 
-```bash
 source venv/bin/activate
-```
 
-Install dependencies:
+Install Dependencies
 
-```bash
 pip install -r requirements.txt
-```
 
-## ▶️ Running the System
+▶️ Running the System
+Run Streamlit UI
 
-**Run Streamlit UI**
-
-```bash
 streamlit run src/srs_app.py
-```
 
-**Run FastAPI Backend**
+Run FastAPI Backend
 
-```bash
 python -m uvicorn src.fastapi_app:app --reload
-```
 
-API documentation: `http://127.0.0.1:8000/docs`
+API Docs:
 
-**Run SRS Extraction Pipeline**
+http://127.0.0.1:8000/docs
+🎯 Key Highlights
 
-```bash
-python test_srs_extractor.py srs_docs/OSMS_SRS.pdf
-```
+✅ Multi-modal SRS processing (Doc, Audio, Video, Email, Chat)
+✅ AI-powered requirement extraction
+✅ Automated test case generation
+✅ Feature clustering with FPR
+✅ Real-time interactive dashboard
+✅ Database-backed persistence
 
-**Run LLM Testing Interface**
+🔮 Future Improvements
+Retrieval Augmented Generation (RAG)
+OpenAI / HuggingFace / Ollama integration
+Requirement ambiguity detection
+SRS quality scoring
+Handwritten note classification (advanced OCR)
+Real-time collaboration features
+CI/CD integration for requirement validation
+👨‍💻 Author
 
-```bash
-streamlit run test_pipeline.py
-```
-
-## 🔮 Future Improvements
-
-- Retrieval Augmented Generation (RAG)
-- OpenAI / HuggingFace / Ollama integration
-- Requirement ambiguity detection
-- Automated requirement validation
-- SRS quality scoring
-- Interactive analytics dashboards
-- CI/CD integration for requirement testing
-
-## 👨‍💻 Author
-
-Chamith Shanaka Samarasinghe  
+Chamith Shanaka Samarasinghe
 AI/ML & Data Science Intern — JW Infotech

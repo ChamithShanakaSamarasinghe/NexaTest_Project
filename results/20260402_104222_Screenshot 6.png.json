@@ -1,0 +1,97 @@
+{
+    "sections": [],
+    "requirements": [
+        "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes."
+    ],
+    "features": [],
+    "test_cases": [
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "valid email",
+            "expected": "Accepted",
+            "id": "TC_1_1",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes."
+        },
+        {
+            "technique": "Equivalence Partitioning",
+            "input": "invalid email",
+            "expected": "Rejected",
+            "id": "TC_1_2",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes."
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "minimum value",
+            "expected": "Accepted",
+            "id": "TC_1_3",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes."
+        },
+        {
+            "technique": "Boundary Value Analysis",
+            "input": "just below minimum",
+            "expected": "Rejected",
+            "id": "TC_1_4",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes."
+        },
+        {
+            "technique": "Decision Table",
+            "input": "condition combinations",
+            "expected": "System behaves correctly",
+            "id": "TC_1_5",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes."
+        },
+        {
+            "id": "TC_1_ST_1",
+            "technique": "State Transition Testing",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes.",
+            "input": "Initial \u2192 Action \u2192 Next State",
+            "expected": "Correct state transition"
+        },
+        {
+            "id": "TC_1_UC_1",
+            "technique": "Use Case Testing",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes.",
+            "input": "User follows normal flow",
+            "expected": "Successful extraction"
+        },
+        {
+            "id": "TC_1_UC_2",
+            "technique": "Use Case Testing",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes.",
+            "input": "User deviates from flow",
+            "expected": "Handled with proper error"
+        },
+        {
+            "id": "TC_1_EX_1",
+            "technique": "Exploratory Testing",
+            "requirement": "[IMAGE_INPUT] 3.4 Academic Records and Grading e The system shall allow lecturers to submit grades for enrolled students. e The system shall allow lecturers to update submitted grades before finalization. e The system shall calculate grade point averages automatically.  e The system shall generate academic performance reports for students.  3.5 Reporting and Notifications e The system shall generate reports in PDF format. e The system shall notify students via email when grades are published.  e The system shall log report generation activities for audit purposes.",
+            "input": "Random unexpected inputs",
+            "expected": "System handles gracefully"
+        }
+    ],
+    "clean_text": "[image_input] 3.4 academic records and grading e the system shall allow lecturers to submit grades for enrolled students. e the system shall allow lecturers to update submitted grades before finalization. e the system shall calculate grade point averages automatically.  e the system shall generate academic performance reports for students.  3.5 reporting and notifications e the system shall generate reports in pdf format. e the system shall notify students via email when grades are published.  e the system shall log report generation activities for audit purposes.",
+    "fpr": {
+        "clusters": [
+            0
+        ],
+        "keywords": {
+            "0": [
+                "shall",
+                "students",
+                "grades",
+                "academic",
+                "allow"
+            ]
+        },
+        "metrics": {
+            "silhouette_score": 0.0,
+            "total_requirements": 1,
+            "total_clusters": 1
+        }
+    },
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}

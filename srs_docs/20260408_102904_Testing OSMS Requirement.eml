@@ -1,0 +1,23 @@
+MIME-Version: 1.0
+Date: Wed, 8 Apr 2026 09:41:49 +0530
+Message-ID: <CA+e5_ara55TGhy+1i_HFHEBy2imv4XqK4VpATZtUuOP4tNGbqA@mail.gmail.com>
+Subject: Testing OSMS Requirement
+From: Chamith Samarasinghe <shanakasamarasinhe@gmail.com>
+To: shanaifel@gmail.com
+Content-Type: multipart/alternative; boundary="00000000000074841e064eeb1960"
+
+--00000000000074841e064eeb1960
+Content-Type: text/plain; charset="UTF-8"
+
+The system shall allow users to register using email.
+The system shall allow password reset functionality.
+The system must support course enrollment.
+The system shall generate academic reports
+
+--00000000000074841e064eeb1960
+Content-Type: text/html; charset="UTF-8"
+
+<div dir="ltr"><div dir="ltr">The system shall allow users to register using email.<div>The system shall allow password reset functionality.</div><div>The system must support course enrollment.<br>The system shall generate academic reports</div></div>
+</div>
+
+--00000000000074841e064eeb1960--

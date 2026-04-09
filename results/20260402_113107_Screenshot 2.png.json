@@ -1,0 +1,17 @@
+{
+    "sections": [],
+    "requirements": [],
+    "features": [],
+    "test_cases": [],
+    "clean_text": "[image_input] 1.2 scope  the online student management system (osms) is a web-based application designed to automate and manage academic and administrative operations of an educational institution. the system facilitates student registration, course enrolment, grade management, and academic reporting while ensuring secure and controlled access to system resources.  the osms aims to improve data accuracy, reduce manual workload, and provide timely access to academic information for administrators, lecturers, and students.  1.3 definitions, acronyms, and abbreviations  term description  osms online student management system srs software requirements specification rbac role-based access control  crud create, read, update, delete  1.4 intended audience  this document is intended for: \u00a2 software developers implementing the system e system analysts validating requirements e testers designing test cases  e researchers performing requirement segmentation and training-based analysis",
+    "fpr": {
+        "clusters": [],
+        "keywords": {},
+        "metrics": {}
+    },
+    "test_results": {
+        "test_requirement_extraction": "PASSED",
+        "test_testcase_generation": "PASSED",
+        "test_srs_upload": "PASSED"
+    }
+}
