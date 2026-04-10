@@ -1,80 +1,92 @@
-## NexaTest 🚀
+# NexaTest 🚀  
+### AI-Powered Multi-Modal SRS Intelligence Platform
 
-An AI-powered SRS Automation Platform for extracting, analyzing, and generating insights from multi-format requirement sources.
+NexaTest is an advanced AI-driven platform designed to **extract, analyze, validate, and enhance Software Requirement Specifications (SRS)** from real-world multi-format sources.
+
+It transforms unstructured inputs into **structured, testable, and intelligent requirement insights** using Machine Learning and Large Language Models (LLMs).
+
+---
+
+## 🌟 Key Highlights
+
+✅ Multi-modal SRS processing (Docs, Audio, Video, Email, Chat)  
+✅ AI-powered requirement extraction & classification  
+✅ Automated test case generation  
+✅ Feature Priority Risk (FPR) clustering & analysis  
+✅ Confidence scoring using LLM pipeline  
+✅ Interactive Streamlit dashboard  
+✅ Persistent SQLite database storage  
 
 ---
 
 ## 🚀 Core Technologies
 
-The platform combines multiple technologies:
-
-- **Streamlit** → Interactive UI for SRS upload and visualization  
-- **FastAPI** → Backend API services  
-- **Machine Learning** → Requirement classification & clustering  
-- **LLM Pipeline** → AI-powered requirement analysis  
+- **Streamlit** → Interactive UI & visualization  
+- **FastAPI** → High-performance backend APIs  
+- **Machine Learning (Scikit-learn)** → Classification & clustering  
+- **LLM Pipeline** → Intelligent requirement enhancement  
 - **KeyBERT** → Keyword extraction  
 - **spaCy NLP** → Named entity recognition  
 - **DistilBART** → Text summarization  
-- **Whisper (OpenAI)** → Audio & video transcription  
+- **Whisper (OpenAI)** → Audio/video transcription  
 - **Tesseract OCR** → Image & handwritten text extraction  
-- **SQLite** → Persistent database storage  
+- **SQLite** → Persistent storage  
 
 ---
 
-## 📄 Supported SRS Input (MULTI-MODAL 🔥)
+## 📄 Multi-Modal Input Support 🔥
 
-NexaTest now supports **real-world requirement sources**, not just documents:
+NexaTest processes real-world requirement sources beyond traditional documents:
 
 ### 📁 Documents
-- `.docx` (Word)
-- `.pdf` (PDF)
-- `.pptx` (PowerPoint)
+- `.docx`, `.pdf`, `.pptx`
 
 ### 🖼️ Images
-- `.png`, `.jpg`, `.jpeg`
-- OCR-based text extraction (Tesseract)
+- `.png`, `.jpg`, `.jpeg`  
+- OCR-based text extraction
 
 ### 🎧 Audio
-- `.mp3`, `.wav`
-- Speech-to-text using Whisper
+- `.mp3`, `.wav`  
+- Speech-to-text via Whisper
 
 ### 🎬 Video
-- `.mp4`, `.avi`, `.mov`
-- Audio extracted → Transcribed → Processed
+- `.mp4`, `.avi`, `.mov`  
+- Audio extraction → Transcription → Processing
 
 ### 📧 Emails
-- `.eml`
-- Header removal (From, Subject, etc.)
-- Signature & greeting cleanup
+- `.eml`  
+- Header removal + signature cleanup
 
-### 💬 Chat / Messaging
-- `.txt`
-- WhatsApp / Messenger-style chat parsing
+### 💬 Chat Data
+- `.txt`  
+- WhatsApp / Messenger parsing  
 - Slang normalization (e.g., *pls → please*)
 
 ---
 
-## ⚙️ What the System Automatically Extracts
+## ⚙️ System Capabilities
+
+NexaTest automatically extracts and generates:
 
 - 📌 Functional Requirements  
 - 📌 Non-functional Requirements  
 - 📌 System Features  
-- 📌 Sections & Structure  
+- 📌 Document Structure & Sections  
 - 📌 Keywords & Clusters  
-- 📌 Test Cases (Auto-generated)
+- 📌 Auto-generated Test Cases  
 
 ---
 
-## 🧠 AI Requirement Analysis Pipeline
+## 🧠 AI Processing Pipeline
 
 
-Multi-Modal Input (Doc / Audio / Video / Email / Chat)
+Multi-Modal Input
 ↓
 Text Extraction Layer
 ↓
-Text Cleaning & Normalization
+Cleaning & Normalization
 ↓
-Sentence Splitting
+Sentence Segmentation
 ↓
 Requirement Extraction Engine
 ↓
@@ -88,32 +100,30 @@ Test Case Generation
 ↓
 Database Storage
 ↓
-Streamlit UI Visualization
+Streamlit Visualization
 
 
 ---
 
 ## 🔍 Feature Priority Risk (FPR) Analysis
 
-Capabilities include:
+Advanced clustering-based analysis for:
 
-- Requirement clustering
-- Feature mapping
-- Risk identification
-- Priority classification
-- Cluster quality evaluation
+- Requirement grouping  
+- Feature mapping  
+- Risk identification  
+- Priority classification  
 
-**Metrics calculated:**
-
+### 📊 Metrics:
 - Silhouette Score  
-- Cluster similarity  
-- Feature density  
+- Cluster Similarity  
+- Feature Density  
 
 ---
 
 ## 🧪 Automated Test Case Generation
 
-For each requirement, the system generates:
+Each requirement is transformed into structured test cases using:
 
 - Equivalence Partitioning  
 - Boundary Value Analysis  
@@ -124,7 +134,9 @@ For each requirement, the system generates:
 
 ---
 
-## 📊 Confidence Scoring System (LLM Pipeline)
+## 📊 Confidence Scoring System
+
+Evaluates requirement quality using weighted metrics:
 
 | Metric              | Weight |
 |--------------------|--------|
@@ -132,33 +144,28 @@ For each requirement, the system generates:
 | Completeness        | 0.35   |
 | Safety              | 0.25   |
 
-**Formula:**
+### Formula:
+
+Final Score = (0.4 × Semantic) + (0.35 × Completeness) + (0.25 × Safety)
 
 
-Final Score = (0.4 × Semantic) +
-(0.35 × Completeness) +
-(0.25 × Safety)
+### Score Bands:
 
-
-**Bands:**
-
-| Score  | Band |
+| Score  | Grade |
 |--------|------|
-| ≥ 0.85 | A    |
-| ≥ 0.70 | B    |
-| ≥ 0.50 | C    |
-| < 0.50 | D    |
+| ≥ 0.85 | A |
+| ≥ 0.70 | B |
+| ≥ 0.50 | C |
+| < 0.50 | D |
 
 ---
 
-## 🧹 LLM Response Post-Processing
+## 🧹 LLM Post-Processing
 
-Includes:
-
-- Removing filler phrases  
-- Cleaning formatting  
-- Normalizing whitespace  
-- Improving readability  
+- Removes filler phrases  
+- Cleans formatting  
+- Normalizes whitespace  
+- Improves readability  
 
 ---
 
@@ -166,34 +173,34 @@ Includes:
 
 Stored in `db.sqlite3`
 
-| Table             | Description |
-|------------------|------------|
-| documents        | Uploaded files |
-| sections         | Extracted sections |
-| requirements     | Extracted requirements |
-| features         | Identified features |
-| fpr_results      | Clustering results |
-| test_results     | Test execution logs |
+| Table          | Description |
+|---------------|------------|
+| documents     | Uploaded files |
+| sections      | Extracted sections |
+| requirements  | Extracted requirements |
+| features      | Identified features |
+| fpr_results   | Clustering outputs |
+| test_results  | Generated test cases |
 
 ---
 
 ## 📂 Project Structure
 
 
-NexaTest
+NexaTest/
 │
-├── src
-│ ├── srs_app.py
-│ ├── fastapi_app.py
-│ ├── db
-│ ├── enhancer.py
-│ ├── fpr
-│ ├── testcase
-│ └── services
+├── src/
+│ ├── srs_app.py # Streamlit UI
+│ ├── fastapi_app.py # FastAPI backend
+│ ├── enhancer.py # LLM enhancements
+│ ├── db/ # Database modules
+│ ├── fpr/ # Clustering logic
+│ ├── testcase/ # Test case generation
+│ └── services/ # Core services
 │
-├── srs_docs
-├── results
-├── db.sqlite3
+├── srs_docs/ # Sample inputs
+├── results/ # Outputs
+├── db.sqlite3 # Database
 ├── requirements.txt
 └── README.md
 
@@ -213,7 +220,7 @@ Windows
 
 venv\Scripts\activate
 
-Mac / Linux
+Mac/Linux
 
 source venv/bin/activate
 
@@ -222,34 +229,45 @@ Install Dependencies
 pip install -r requirements.txt
 
 ▶️ Running the System
-Run Streamlit UI
+
+Start Streamlit UI
 
 streamlit run src/srs_app.py
 
-Run FastAPI Backend
+Start FastAPI Backend
 
-python -m uvicorn src.fastapi_app:app --reload
+uvicorn src.fastapi_app:app --reload
 
-API Docs:
+API Documentation
 
 http://127.0.0.1:8000/docs
-🎯 Key Highlights
 
-✅ Multi-modal SRS processing (Doc, Audio, Video, Email, Chat)
-✅ AI-powered requirement extraction
-✅ Automated test case generation
-✅ Feature clustering with FPR
-✅ Real-time interactive dashboard
-✅ Database-backed persistence
+🎯 Use Cases
 
-🔮 Future Improvements
-Retrieval Augmented Generation (RAG)
-OpenAI / HuggingFace / Ollama integration
-Requirement ambiguity detection
-SRS quality scoring
-Handwritten note classification (advanced OCR)
-Real-time collaboration features
-CI/CD integration for requirement validation
+Software Development Teams
+
+QA Engineers & Testers
+
+Business Analysts
+
+Research & Academic Projects
+
+🔮 Future Enhancements
+
+🔗 Retrieval-Augmented Generation (RAG)
+
+☁️ Cloud Deployment (AWS / Azure)
+
+🤖 Advanced LLM integrations (OpenAI, HuggingFace, Ollama)
+
+📊 SRS Quality Scoring System
+
+✍️ Advanced OCR for handwritten notes
+
+🤝 Real-time collaboration features
+
+🔄 CI/CD integration for requirement validation
+
 👨‍💻 Author
 
 Chamith Shanaka Samarasinghe

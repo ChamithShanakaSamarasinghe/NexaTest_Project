@@ -1,6 +1,5 @@
 import os
 
-# FFmpeg path
 os.environ["PATH"] += r";C:\Users\raven\OneDrive\Desktop\ffmpeg\ffmpeg-8.1-essentials_build\bin"
 
 import streamlit as st
@@ -10,6 +9,8 @@ import re
 import subprocess
 import email
 import uuid
+import sqlite3
+from datetime import datetime
 
 from docx import Document
 from pptx import Presentation
@@ -18,18 +19,15 @@ import pytesseract
 
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-import sqlite3
-from datetime import datetime
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from src.enhancer import PipelineEnhancer
 from src.fpr.fpr_pipeline import run_fpr_pipeline
 from src.testcase.generator import generate_test_cases
+from src.testcase.verifier import verify_test_cases   # 🔥 NEW
 
 DB_FILE = "db.sqlite3"
 SRS_FOLDER = "srs_docs"
-
 os.makedirs(SRS_FOLDER, exist_ok=True)
 
 enhancer = PipelineEnhancer()
@@ -125,19 +123,26 @@ uploaded_files = st.file_uploader(
     accept_multiple_files=True
 )
 
-# 🔥 Prevent re-run duplication
-if "processed" not in st.session_state:
-    st.session_state.processed = False
+# ---------------- SESSION SAFETY ----------------
+if "processed_session_id" not in st.session_state:
+    st.session_state.processed_session_id = None
+
+verified_test_cases = []
 
 if uploaded_files:
 
     st.info("📂 Files ready. Click below to process all together.")
 
-    if st.button("🚀 Process All Inputs") and not st.session_state.processed:
+    if st.button("🚀 Process All Inputs"):
 
-        st.session_state.processed = True
+        if st.session_state.processed_session_id is not None:
+            st.warning("⚠ Already processed. Refresh to upload new data.")
+            st.stop()
 
-        session_id = str(uuid.uuid4())[:8]
+        st.session_state.processed_session_id = str(uuid.uuid4())[:8]
+
+        session_id = st.session_state.processed_session_id
+
         all_paragraphs = []
         file_names = []
 
@@ -192,8 +197,6 @@ if uploaded_files:
                 elif uploaded_file.name.endswith((".mp4", ".avi", ".mov")):
                     import whisper
                     audio_path = srs_path + ".mp3"
-
-                    st.info(f"🎬 Extracting: {uploaded_file.name}")
                     extract_audio_from_video(srs_path, audio_path)
 
                     model = whisper.load_model("base")
@@ -203,8 +206,6 @@ if uploaded_files:
                         paragraphs.append(f"[VIDEO_INPUT] {s}")
 
                 elif uploaded_file.name.endswith(".eml"):
-                    st.info(f"📧 Email: {uploaded_file.name}")
-
                     raw_email = uploaded_file.read().decode("utf-8", errors="ignore")
                     msg = email.message_from_string(raw_email)
 
@@ -222,8 +223,6 @@ if uploaded_files:
                         paragraphs.append(f"[EMAIL_INPUT] {s}")
 
                 elif uploaded_file.name.endswith(".txt"):
-                    st.info(f"💬 Chat: {uploaded_file.name}")
-
                     raw_text = uploaded_file.read().decode("utf-8")
                     lines = parse_chat_lines(raw_text)
 
@@ -271,8 +270,13 @@ if uploaded_files:
                 features.append(text)
 
         enhanced = enhancer.enhance(full_text)
+
         fpr_result = run_fpr_pipeline(requirements) if requirements else {"clusters": [], "keywords": {}, "metrics": {}}
+
         test_cases = generate_test_cases(requirements)
+
+        # 🔥 NEW: VERIFY TEST CASES
+        verified_test_cases = verify_test_cases(test_cases, requirements)
 
         test_results = {
             "test_requirement_extraction": "PASSED",
@@ -281,7 +285,38 @@ if uploaded_files:
         }
 
         doc_name = f"SESSION_{session_id}_" + "_".join(file_names)
+
         doc_id = insert_into_db(doc_name, sections, requirements, features, test_results, fpr_result)
+
+        # ---------------- SAVE VERIFICATION ----------------
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+
+        cursor.execute("""
+        CREATE TABLE IF NOT EXISTS test_case_verification (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            document_id INTEGER,
+            test_case_id TEXT,
+            score REAL,
+            status TEXT,
+            issues TEXT
+        )
+        """)
+
+        for tc in verified_test_cases:
+            cursor.execute(
+                "INSERT INTO test_case_verification (document_id, test_case_id, score, status, issues) VALUES (?, ?, ?, ?, ?)",
+                (
+                    doc_id,
+                    tc.get("id"),
+                    tc.get("score", 0),
+                    tc.get("status"),
+                    json.dumps(tc.get("issues", []))
+                )
+            )
+
+        conn.commit()
+        conn.close()
 
         st.success(f"💾 Saved ALL inputs under ONE doc_id: {doc_id}")
 
@@ -293,7 +328,14 @@ if uploaded_files:
         col4.metric("🧪 Test Cases", len(test_cases))
 
         # ---------------- UI TABS ----------------
-        tabs = st.tabs(["📄 Sections", "📌 Requirements", "✨ Features", "🧠 Clusters", "🧪 Test Cases"])
+        tabs = st.tabs([
+            "📄 Sections",
+            "📌 Requirements",
+            "✨ Features",
+            "🧠 Clusters",
+            "🧪 Test Cases",
+            "✅ Verified Test Cases"
+        ])
 
         with tabs[0]:
             for sec in sections:
@@ -327,5 +369,21 @@ if uploaded_files:
                     st.write("📌 Requirement:", tc.get("requirement"))
                     st.write("🔹 Input:", tc.get("input"))
                     st.write("✅ Expected:", tc.get("expected"))
+
+        with tabs[5]:
+            for tc in verified_test_cases[:100]:
+                status_icon = "🟢" if tc["status"] == "PASSED" else "🔴"
+
+                with st.expander(f"{status_icon} {tc.get('id')} | Score: {tc.get('score', 0)}"):
+                    st.write("📌 Requirement:", tc.get("requirement"))
+                    st.write("🔹 Input:", tc.get("input"))
+                    st.write("✅ Expected:", tc.get("expected"))
+                    st.write("⚙ Technique:", tc.get("technique"))
+                    st.write("📊 Status:", tc.get("status"))
+
+                    if tc.get("issues"):
+                        st.warning("⚠ Issues:")
+                        for issue in tc["issues"]:
+                            st.write(f"- {issue}")
 
         st.balloons()
