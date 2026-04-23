@@ -1,0 +1,15 @@
+venv/
+.venv/
+__pycache__/
+uploads/
+data/
+results/
+analysis/
+cloned_tasks/
+srs_docs/
+db.sqlite3
+*.pdf
+*.docx
+*.sqlite3
+*.json
+*.txt
