@@ -7,5 +7,5 @@ app = FastAPI()
 def home():
     return {"message": "NexaTest is running"}
 
-# THIS is required for Vercel
+# REQUIRED for Vercel
 handler = Mangum(app)
