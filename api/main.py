@@ -1,7 +1,5 @@
-from fastapi import FastAPI
-
-app = FastAPI()
-
-@app.get("/")
-def home():
-    return {"message": "NexaTest is running"}
+def handler(request):
+    return {
+        "statusCode": 200,
+        "body": "NexaTest is running"
+    }
