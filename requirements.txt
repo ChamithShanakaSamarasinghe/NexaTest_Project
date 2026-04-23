@@ -1,2 +1,9 @@
+streamlit
 fastapi
 uvicorn
+python-docx
+python-pptx
+pillow
+PyPDF2
+numpy
+requests
