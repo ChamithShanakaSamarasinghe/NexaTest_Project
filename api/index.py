@@ -4,4 +4,4 @@ app = FastAPI()
 
 @app.get("/")
 def home():
-    return {"message": "NexaTest API is running"}
+    return {"message": "NexaTest API deployed successfully 🚀"}
