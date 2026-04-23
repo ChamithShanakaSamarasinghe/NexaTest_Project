@@ -11,5 +11,4 @@ db.sqlite3
 *.pdf
 *.docx
 *.sqlite3
-*.json
-*.txt
+*.pyc
