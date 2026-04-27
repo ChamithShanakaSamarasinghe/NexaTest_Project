@@ -12,10 +12,6 @@
       "dest": "src/fastapi_app.py"
     },
     {
-      "src": "/",
-      "dest": "frontend/index.html"
-    },
-    {
       "src": "/(.*)",
       "dest": "frontend/index.html"
     }
