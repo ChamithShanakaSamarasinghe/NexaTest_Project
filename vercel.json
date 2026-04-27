@@ -2,14 +2,14 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/fastapi_app.py",
+      "src": "api/fastapi_app.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "src/fastapi_app.py"
+      "dest": "api/fastapi_app.py"
     },
     {
       "src": "/(.*)",
