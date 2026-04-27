@@ -1,4 +1,4 @@
-const API_URL = "https://nexa-test-project.vercel.app/api/full-analysis";
+const API_URL = "/api/full-analysis";
 
 async function processFiles() {
 
@@ -11,7 +11,7 @@ async function processFiles() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        doc_id: 1
+        doc_id: 1   // ⚠️ make sure this exists in your DB
       })
     });
 
@@ -26,7 +26,7 @@ async function processFiles() {
 
     document.getElementById("status").innerText = "Done ✅";
 
-    // SAFE UI UPDATES
+    // Metrics
     document.getElementById("reqCount").innerText =
       "📌 Requirements: " + (data.requirements?.length || 0);
 
@@ -37,12 +37,44 @@ async function processFiles() {
       "🧠 Clusters: " + (data.fpr?.clusters?.length || 0);
 
     document.getElementById("testCount").innerText =
-      "🧪 Test Cases: " + (data.fpr?.test_cases?.length || 0);
+      "🧪 Test Cases: 0"; // not returned by backend
 
     renderOutput(data);
 
   } catch (err) {
     console.error("Frontend Error:", err);
     document.getElementById("status").innerText = "Error ❌";
+  }
+}
+
+function renderOutput(data) {
+  const output = document.getElementById("output");
+  output.innerHTML = "";
+
+  // Requirements
+  output.innerHTML += `<h2>📌 Requirements</h2>`;
+  (data.requirements || []).forEach(r => {
+    output.innerHTML += `<div class="section">${r}</div>`;
+  });
+
+  // Sections (BONUS: your backend actually returns this)
+  if (data.sections) {
+    output.innerHTML += `<h2>📄 Sections</h2>`;
+    Object.entries(data.sections).forEach(([key, value]) => {
+      output.innerHTML += `
+        <div class="section">
+          <b>${key}</b><br/>
+          ${value}
+        </div>
+      `;
+    });
+  }
+
+  // Clusters
+  if (data.fpr?.clusters) {
+    output.innerHTML += `<h2>🧠 Clusters</h2>`;
+    data.fpr.clusters.forEach(c => {
+      output.innerHTML += `<div class="section">${c}</div>`;
+    });
   }
 }
