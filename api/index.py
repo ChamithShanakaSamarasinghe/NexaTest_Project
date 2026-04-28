@@ -11,18 +11,17 @@ import numpy as np
 import shutil
 import os
 
-# Fixing numpy issue
+# Fix numpy issue
 np.float = float
 
-# PATH SETUP (FIXED)
+# PATH SETUP
 BASE_PATH = Path(__file__).resolve().parent.parent
 SRC_PATH = BASE_PATH / "src"
 
 sys.path.insert(0, str(BASE_PATH))
 sys.path.insert(0, str(SRC_PATH))
 
-
-# SAFE IMPORTS (FIXED)
+# SAFE IMPORTS
 try:
     from src.fpr.fpr_pipeline import run_fpr_pipeline
 except:
@@ -42,7 +41,7 @@ try:
 except Exception:
     orc = None
 
-# DATABASE (FIXED)
+# DATABASE
 DB_FILE = str(BASE_PATH / "db.sqlite3")
 
 # FASTAPI APP
@@ -67,13 +66,6 @@ def query_db(query: str, params: tuple = ()):
     conn.close()
     return [dict(row) for row in results]
 
-def execute_db(query: str, params: tuple = ()):
-    conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
-    cursor.execute(query, params)
-    conn.commit()
-    conn.close()
-
 def convert_json_safe(obj):
     if isinstance(obj, dict):
         return {str(k): convert_json_safe(v) for k, v in obj.items()}
@@ -83,83 +75,59 @@ def convert_json_safe(obj):
         return int(obj)
     elif isinstance(obj, (np.floating,)):
         return float(obj)
-    else:
-        return obj
+    return obj
 
-# DB ENDPOINTS
-@app.get("/documents")
-def get_documents():
-    return {"documents": query_db("SELECT * FROM documents")}
-
-@app.get("/documents/{doc_id}/sections")
-def get_sections(doc_id: int):
-    data = query_db("SELECT * FROM sections WHERE document_id=?", (doc_id,))
-    if not data:
-        raise HTTPException(404, "Sections not found")
-    return {"sections": data}
-
-@app.get("/documents/{doc_id}/requirements")
-def get_requirements_db(doc_id: int):
-    data = query_db("SELECT * FROM requirements WHERE document_id=?", (doc_id,))
-    if not data:
-        raise HTTPException(404, "Requirements not found")
-    return {"requirements": data}
-
-@app.get("/documents/{doc_id}/features")
-def get_features(doc_id: int):
-    data = query_db("SELECT * FROM features WHERE document_id=?", (doc_id,))
-    if not data:
-        raise HTTPException(404, "Features not found")
-    return {"features": data}
-
-@app.get("/documents/{doc_id}/test-results")
-def get_test_results(doc_id: int):
-    data = query_db("SELECT * FROM test_results WHERE doc_id=?", (doc_id,))
-    if not data:
-        raise HTTPException(404, "Test results not found")
-    return {"test_results": data}
-
-@app.get("/documents/{doc_id}/fpr")
-def get_fpr_results(doc_id: int):
-    data = query_db("SELECT * FROM fpr_results WHERE document_id=?", (doc_id,))
-    if not data:
-        raise HTTPException(404, "FPR results not found")
-    for row in data:
-        row["clusters"] = json.loads(row.get("clusters") or "[]")
-        row["keywords"] = json.loads(row.get("keywords") or "{}")
-        row["metrics"] = json.loads(row.get("metrics") or "{}")
-    return {"fpr_results": data}
-
-@app.get("/analytics/{doc_id}")
-def get_analytics(doc_id: int):
-    results = query_db("SELECT * FROM test_results WHERE doc_id=?", (doc_id,))
-    total = len(results)
-    passed = len([r for r in results if r["status"] == "PASSED"])
-    failed = total - passed
-    return {"total_tests": total, "passed": passed, "failed": failed}
+# ROOT
+@app.get("/")
+def home():
+    return {"message": "✅ NexaTest Backend Running"}
 
 # FULL ANALYSIS
 @app.post("/full-analysis")
 def full_analysis(file_path: str = None, doc_id: int = None):
     try:
-        if file_path:
-            file_path = file_path.strip('"')
+        # GET TEXT
+        full_text = ""
 
-        if orc:
+        if orc and file_path:
             result = orc.process(job_id="JOB-002", file_path=file_path)
             full_text = result["content"].get("text", "")
-        else:
-            if not doc_id:
-                raise HTTPException(400, "Provide doc_id")
-            reqs = query_db("SELECT requirement_text FROM requirements WHERE document_id=?", (doc_id,))
+
+        elif doc_id:
+            reqs = query_db(
+                "SELECT requirement_text FROM requirements WHERE document_id=?",
+                (doc_id,)
+            )
             full_text = "\n".join([r["requirement_text"] for r in reqs])
 
+        if not full_text:
+            raise HTTPException(400, "No text found for processing")
+
+        # SECTIONS
         sections = segment_sections(full_text)
 
+        # REQUIREMENTS
         requirements = []
         for sec_text in sections.values():
             requirements.extend(extract_requirements(sec_text))
 
+        # FEATURES
+        features = [
+            r for r in requirements
+            if any(word in r.lower() for word in ["system", "feature", "module"])
+        ]
+
+        # TEST CASES
+        test_cases = [
+            {
+                "id": f"TC-{i+1}",
+                "requirement": req,
+                "expected": "System should handle requirement correctly"
+            }
+            for i, req in enumerate(requirements[:5])
+        ]
+
+        # FPR PIPELINE
         fpr_result = {"clusters": [], "keywords": {}, "metrics": {}}
 
         if requirements:
@@ -170,28 +138,27 @@ def full_analysis(file_path: str = None, doc_id: int = None):
                 "metrics": convert_json_safe(res.get("metrics", {}))
             }
 
+        # FINAL RESPONSE
         return {
             "sections": sections,
             "requirements": requirements,
+            "features": features,
+            "test_cases": test_cases,
             "fpr": fpr_result
         }
 
     except Exception as e:
-        print("❌ FULL ANALYSIS ERROR:", str(e))
+        print("❌ ERROR:", str(e))
         raise HTTPException(500, str(e))
 
-# FILE UPLOAD API (FIXED + DEBUG)
+# FILE UPLOAD API 
 UPLOAD_DIR = "/tmp"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
 @app.post("/process")
 async def process(files: list[UploadFile] = File(...)):
     try:
-        print("🔥 API HIT /process")
-
-        requirements = []
-        features = []
-        test_cases = []
+        requirements, features, test_cases = [], [], []
 
         for file in files:
             file_path = os.path.join(UPLOAD_DIR, file.filename)
@@ -202,8 +169,7 @@ async def process(files: list[UploadFile] = File(...)):
             extracted_text = ""
 
             if file.filename.endswith(".txt"):
-                with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
-                    extracted_text = f.read()
+                extracted_text = open(file_path, "r", encoding="utf-8", errors="ignore").read()
 
             elif file.filename.endswith(".docx"):
                 from docx import Document
@@ -215,15 +181,6 @@ async def process(files: list[UploadFile] = File(...)):
                 reader = PyPDF2.PdfReader(file_path)
                 extracted_text = "\n".join([p.extract_text() or "" for p in reader.pages])
 
-            elif file.filename.endswith((".mp3", ".wav", ".mp4")):
-                extracted_text = f"Audio processed: {file.filename}"
-
-            elif file.filename.endswith((".png", ".jpg", ".jpeg")):
-                extracted_text = f"Image processed: {file.filename}"
-
-            else:
-                extracted_text = f"Unsupported file: {file.filename}"
-
             sentences = extracted_text.split(".")
 
             for s in sentences:
@@ -231,19 +188,8 @@ async def process(files: list[UploadFile] = File(...)):
                 if len(s) > 10:
                     if any(w in s.lower() for w in ["shall", "must", "should"]):
                         requirements.append(s)
-
                     if any(w in s.lower() for w in ["system", "feature", "module"]):
                         features.append(s)
-
-        fpr_result = {"clusters": [], "keywords": {}, "metrics": {}}
-
-        if requirements:
-            res = run_fpr_pipeline(requirements)
-            fpr_result = {
-                "clusters": res.get("clusters", []),
-                "keywords": convert_json_safe(res.get("keywords", {})),
-                "metrics": convert_json_safe(res.get("metrics", {}))
-            }
 
         for i, req in enumerate(requirements[:5]):
             test_cases.append({
@@ -255,15 +201,11 @@ async def process(files: list[UploadFile] = File(...)):
         return {
             "requirements": requirements,
             "features": features,
-            "clusters": fpr_result.get("clusters", []),
-            "test_cases": test_cases,
-            "fpr": fpr_result
+            "test_cases": test_cases
         }
 
     except Exception as e:
-        print("❌ PROCESS ERROR:", str(e))
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(500, str(e))
 
-
-# REQUIRED for Vercel FastAPI detection
+# VERCEL HANDLER
 handler = Mangum(app)
