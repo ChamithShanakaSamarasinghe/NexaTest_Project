@@ -2,6 +2,7 @@
 
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from mangum import Mangum
 import sqlite3
 import sys
 from pathlib import Path
@@ -265,4 +266,4 @@ async def process(files: list[UploadFile] = File(...)):
 
 
 # REQUIRED for Vercel FastAPI detection
-handler = app
+handler = Mangum(app)
