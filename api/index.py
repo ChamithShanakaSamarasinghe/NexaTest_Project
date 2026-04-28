@@ -11,35 +11,52 @@ import numpy as np
 import shutil
 import os
 
-# Fixing NUMPY issue
+# FIX NUMPY ISSUE
 np.float = float
 
-# PATH SETUP
+# Path Setup
 BASE_PATH = Path(__file__).resolve().parent.parent
 SRC_PATH = BASE_PATH / "src"
 
 sys.path.insert(0, str(BASE_PATH))
 sys.path.insert(0, str(SRC_PATH))
 
-# Safe Imports
-try:
-    from src.fpr.fpr_pipeline import run_fpr_pipeline
-except:
-    run_fpr_pipeline = None  
+# SAFE IMPORT FLAGS (IMPORTANT FIX)
+run_fpr_pipeline = None
+segment_sections = None
+extract_requirements = None
+orc = None
 
-try:
-    from segment_sections import segment_sections
-    from segment_requirements import extract_requirements
-except:
-    from src.segment_sections import segment_sections
-    from src.segment_requirements import extract_requirements
+# Lazy load functions ONLY when needed
+def load_fpr():
+    global run_fpr_pipeline
+    if run_fpr_pipeline is None:
+        try:
+            from src.fpr.fpr_pipeline import run_fpr_pipeline as _run
+            run_fpr_pipeline = _run
+        except:
+            run_fpr_pipeline = None
 
-# OPTIONAL ORCHESTRATOR
-try:
-    from app.services.parsing.orchestrator import Orchestrator
-    orc = Orchestrator()
-except Exception:
-    orc = None
+def load_segments():
+    global segment_sections, extract_requirements
+    if segment_sections is None or extract_requirements is None:
+        try:
+            from src.segment_sections import segment_sections as ss
+            from src.segment_requirements import extract_requirements as er
+            segment_sections = ss
+            extract_requirements = er
+        except:
+            segment_sections = lambda x: {"section": x}
+            extract_requirements = lambda x: [x]
+
+def load_orchestrator():
+    global orc
+    if orc is None:
+        try:
+            from app.services.parsing.orchestrator import Orchestrator
+            orc = Orchestrator()
+        except:
+            orc = None
 
 # DATABASE
 DB_FILE = str(BASE_PATH / "db.sqlite3")
@@ -76,20 +93,22 @@ def convert_json_safe(obj):
         return float(obj)
     return obj
 
-# Root Check
+# Root
 @app.get("/")
 def home():
     return {"message": "✅ NexaTest Backend Running"}
 
-# FULL ANALYSIS
+# Full Service
 @app.post("/full-analysis")
 def full_analysis(file_path: str = None, doc_id: int = None):
     try:
         print("🔥 FULL ANALYSIS HIT")
 
+        load_orchestrator()
+        load_segments()
+
         full_text = ""
 
-        # Get text
         if orc and file_path:
             result = orc.process(job_id="JOB-002", file_path=file_path)
             full_text = result["content"].get("text", "")
@@ -110,10 +129,9 @@ def full_analysis(file_path: str = None, doc_id: int = None):
                 "fpr": {"clusters": [], "keywords": {}, "metrics": {}}
             }
 
-        # Process text
         sections = segment_sections(full_text)
-
         requirements = []
+
         for sec in sections.values():
             requirements.extend(extract_requirements(sec))
 
@@ -131,12 +149,14 @@ def full_analysis(file_path: str = None, doc_id: int = None):
             for i, r in enumerate(requirements[:5])
         ]
 
-        # SAFE FPR (NO CRASH)
+        # SAFE FPR
         fpr_result = {
             "clusters": [],
             "keywords": {},
             "metrics": {}
         }
+
+        load_fpr()
 
         if run_fpr_pipeline and requirements:
             try:
@@ -147,7 +167,7 @@ def full_analysis(file_path: str = None, doc_id: int = None):
                     "metrics": convert_json_safe(res.get("metrics", {}))
                 }
             except Exception as e:
-                print("⚠️ FPR PIPELINE FAILED:", str(e))
+                print("⚠️ FPR FAILED:", str(e))
 
         return {
             "sections": sections,
@@ -160,7 +180,6 @@ def full_analysis(file_path: str = None, doc_id: int = None):
     except Exception as e:
         print("❌ ERROR:", str(e))
         raise HTTPException(500, str(e))
-
 
 # FILE UPLOAD
 UPLOAD_DIR = "/tmp"
