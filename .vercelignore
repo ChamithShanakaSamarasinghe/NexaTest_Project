@@ -10,5 +10,4 @@ srs_docs/
 db.sqlite3
 *.pdf
 *.docx
-*.sqlite3
 *.pyc

@@ -1,56 +1,62 @@
-# File: src/fastapi_app.py change to api/fastapi_app.py
-from fastapi import FastAPI, HTTPException
+# File: api/index.py
+
+from fastapi import FastAPI, HTTPException, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
 import sqlite3
 import sys
 from pathlib import Path
 import json
 import numpy as np
-from fastapi import UploadFile, File
 import shutil
 import os
 
+# Fixing numpy issue
+np.float = float
 
-# 🔹 Temporary patch for deprecated np.float (NumPy ≥1.24)
-np.float = float  # ✅ Fixes store-fpr Internal Server Error
-
-# 🔥 Importing the Feature Pattern Recognition pipeline
-from src.fpr.fpr_pipeline import run_fpr_pipeline
-
-# Setup paths
+# PATH SETUP (FIXED)
 BASE_PATH = Path(__file__).resolve().parent.parent
-SRC_PATH = Path(__file__).resolve().parent
+SRC_PATH = BASE_PATH / "src"
 
-sys.path.insert(0, str(SRC_PATH))
 sys.path.insert(0, str(BASE_PATH))
+sys.path.insert(0, str(SRC_PATH))
 
-# Cloned repo paths
-CLONED_CANDIDATES = [
-    BASE_PATH / "Cloned tasks" / "Nexatest",
-    BASE_PATH / "cloned_tasks" / "Nexatest",
-]
 
-for cand in CLONED_CANDIDATES:
-    if cand.exists() and (cand / "app").exists():
-        sys.path.insert(0, str(cand))
-        break
+# SAFE IMPORTS (FIXED)
+try:
+    from src.fpr.fpr_pipeline import run_fpr_pipeline
+except:
+    from fpr.fpr_pipeline import run_fpr_pipeline
 
-# Importing orchestrator safely
+try:
+    from segment_sections import segment_sections
+    from segment_requirements import extract_requirements
+except:
+    from src.segment_sections import segment_sections
+    from src.segment_requirements import extract_requirements
+
+# OPTIONAL ORCHESTRATOR
 try:
     from app.services.parsing.orchestrator import Orchestrator
     orc = Orchestrator()
 except Exception:
-    orc = None  # Fallback if not available
+    orc = None
 
-# Local modules
-from segment_sections import segment_sections
-from segment_requirements import extract_requirements
+# DATABASE (FIXED)
+DB_FILE = str(BASE_PATH / "db.sqlite3")
 
-# ✅ DB path
-DB_FILE = r"C:\Users\raven\OneDrive\Desktop\SRS - NexaTest\db.sqlite3"
-
+# FASTAPI APP
 app = FastAPI(title="🚀 SRS Automation API")
 
-# 🔧 Utility DB functions
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# DB UTILS
 def query_db(query: str, params: tuple = ()):
     conn = sqlite3.connect(DB_FILE)
     conn.row_factory = sqlite3.Row
@@ -67,7 +73,6 @@ def execute_db(query: str, params: tuple = ()):
     conn.commit()
     conn.close()
 
-# 🔧 Convert keys/values to JSON-safe
 def convert_json_safe(obj):
     if isinstance(obj, dict):
         return {str(k): convert_json_safe(v) for k, v in obj.items()}
@@ -80,7 +85,7 @@ def convert_json_safe(obj):
     else:
         return obj
 
-# 📂 DB Endpoints
+# DB ENDPOINTS
 @app.get("/documents")
 def get_documents():
     return {"documents": query_db("SELECT * FROM documents")}
@@ -132,57 +137,30 @@ def get_analytics(doc_id: int):
     failed = total - passed
     return {"total_tests": total, "passed": passed, "failed": failed}
 
-# 🧠 SRS Processing
-@app.post("/process-srs")
-def process_srs(file_path: str = None, doc_id: int = None):
-    try:
-        if file_path:
-            file_path = file_path.strip('"')
-        if orc:
-            result = orc.process(job_id="JOB-001", file_path=file_path)
-        else:
-            if not doc_id:
-                raise HTTPException(400, "Provide doc_id since Orchestrator is missing")
-            reqs = query_db("SELECT requirement_text FROM requirements WHERE document_id=?", (doc_id,))
-            result = {
-                "enrichment": {"summary": "", "features": {"keywords": [], "entities": []}},
-                "content": {"text": "\n".join([r["requirement_text"] for r in reqs])},
-                "parsing_method": "orchestrator_missing"
-            }
-        return {
-            "summary": result["enrichment"].get("summary", ""),
-            "keywords": result["enrichment"]["features"].get("keywords", []),
-            "entities": result["enrichment"]["features"].get("entities", []),
-            "parsing_method": result.get("parsing_method", "")
-        }
-    except Exception as e:
-        raise HTTPException(500, str(e))
-
+# FULL ANALYSIS
 @app.post("/full-analysis")
 def full_analysis(file_path: str = None, doc_id: int = None):
     try:
         if file_path:
             file_path = file_path.strip('"')
+
         if orc:
             result = orc.process(job_id="JOB-002", file_path=file_path)
             full_text = result["content"].get("text", "")
-            summary = result["enrichment"].get("summary", "")
-            keywords = result["enrichment"]["features"].get("keywords", [])
-            entities = result["enrichment"]["features"].get("entities", [])
-            parsing_method = result.get("parsing_method", "")
         else:
             if not doc_id:
-                raise HTTPException(400, "Provide doc_id since Orchestrator is missing")
+                raise HTTPException(400, "Provide doc_id")
             reqs = query_db("SELECT requirement_text FROM requirements WHERE document_id=?", (doc_id,))
             full_text = "\n".join([r["requirement_text"] for r in reqs])
-            summary, keywords, entities, parsing_method = "", [], [], "orchestrator_missing"
 
         sections = segment_sections(full_text)
+
         requirements = []
         for sec_text in sections.values():
             requirements.extend(extract_requirements(sec_text))
 
         fpr_result = {"clusters": [], "keywords": {}, "metrics": {}}
+
         if requirements:
             res = run_fpr_pipeline(requirements)
             fpr_result = {
@@ -192,58 +170,24 @@ def full_analysis(file_path: str = None, doc_id: int = None):
             }
 
         return {
-            "summary": summary,
-            "keywords": keywords,
-            "entities": entities,
             "sections": sections,
             "requirements": requirements,
-            "fpr": fpr_result,
-            "parsing_method": parsing_method
+            "fpr": fpr_result
         }
+
     except Exception as e:
+        print("❌ FULL ANALYSIS ERROR:", str(e))
         raise HTTPException(500, str(e))
 
-# 💾 Store FPR safely
-@app.post("/store-fpr/{doc_id}")
-def store_fpr(doc_id: int):
-    try:
-        reqs = query_db("SELECT requirement_text FROM requirements WHERE document_id=?", (doc_id,))
-        if not reqs:
-            raise HTTPException(404, "No requirements found")
-        texts = [r["requirement_text"] for r in reqs]
-
-        res = run_fpr_pipeline(texts)
-        fpr_result = {
-            "clusters": res.get("clusters", []),
-            "keywords": convert_json_safe(res.get("keywords", {})),
-            "metrics": convert_json_safe(res.get("metrics", {}))
-        }
-
-        execute_db(
-            "INSERT INTO fpr_results (document_id, clusters, keywords, metrics) VALUES (?, ?, ?, ?)",
-            (
-                doc_id,
-                json.dumps(fpr_result["clusters"]),
-                json.dumps(fpr_result["keywords"]),
-                json.dumps(fpr_result["metrics"])
-            ),
-        )
-
-        return {"message": "FPR stored successfully", "fpr": fpr_result}
-    except Exception as e:
-        raise HTTPException(500, f"store_fpr failed: {str(e)}")
-    
-    # ================================
-# 🚀 FRONTEND FILE UPLOAD ENDPOINT
-# ================================
-
+# FILE UPLOAD API (FIXED + DEBUG)
 UPLOAD_DIR = "/tmp"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
-
 
 @app.post("/process")
 async def process(files: list[UploadFile] = File(...)):
     try:
+        print("🔥 API HIT /process")
+
         requirements = []
         features = []
         test_cases = []
@@ -251,61 +195,38 @@ async def process(files: list[UploadFile] = File(...)):
         for file in files:
             file_path = os.path.join(UPLOAD_DIR, file.filename)
 
-            # Save uploaded file
             with open(file_path, "wb") as buffer:
                 shutil.copyfileobj(file.file, buffer)
 
             extracted_text = ""
 
-            # -----------------------------
-            # 📄 TEXT FILE
-            # -----------------------------
             if file.filename.endswith(".txt"):
                 with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
                     extracted_text = f.read()
 
-            # -----------------------------
-            # 📄 DOCX FILE
-            # -----------------------------
             elif file.filename.endswith(".docx"):
                 from docx import Document
                 doc = Document(file_path)
                 extracted_text = "\n".join([p.text for p in doc.paragraphs])
 
-            # -----------------------------
-            # 📄 PDF FILE
-            # -----------------------------
             elif file.filename.endswith(".pdf"):
                 import PyPDF2
                 reader = PyPDF2.PdfReader(file_path)
-                extracted_text = "\n".join(
-                    [page.extract_text() or "" for page in reader.pages]
-                )
+                extracted_text = "\n".join([p.extract_text() or "" for p in reader.pages])
 
-            # -----------------------------
-            # 🎤 AUDIO / VIDEO (placeholder for Whisper)
-            # -----------------------------
             elif file.filename.endswith((".mp3", ".wav", ".mp4")):
-                extracted_text = f"Audio/Video processed: {file.filename}"
+                extracted_text = f"Audio processed: {file.filename}"
 
-            # -----------------------------
-            # 🖼 IMAGE (placeholder OCR)
-            # -----------------------------
             elif file.filename.endswith((".png", ".jpg", ".jpeg")):
                 extracted_text = f"Image processed: {file.filename}"
 
             else:
                 extracted_text = f"Unsupported file: {file.filename}"
 
-            # -----------------------------
-            # 🧠 SIMPLE EXTRACTION LOGIC
-            # (reuses your existing idea)
-            # -----------------------------
             sentences = extracted_text.split(".")
 
             for s in sentences:
                 s = s.strip()
-
                 if len(s) > 10:
                     if any(w in s.lower() for w in ["shall", "must", "should"]):
                         requirements.append(s)
@@ -313,9 +234,6 @@ async def process(files: list[UploadFile] = File(...)):
                     if any(w in s.lower() for w in ["system", "feature", "module"]):
                         features.append(s)
 
-        # -----------------------------
-        # 🧠 RUN YOUR EXISTING FPR PIPELINE
-        # -----------------------------
         fpr_result = {"clusters": [], "keywords": {}, "metrics": {}}
 
         if requirements:
@@ -326,9 +244,6 @@ async def process(files: list[UploadFile] = File(...)):
                 "metrics": convert_json_safe(res.get("metrics", {}))
             }
 
-        # -----------------------------
-        # 🧪 TEST CASES (TEMP GENERATION)
-        # -----------------------------
         for i, req in enumerate(requirements[:5]):
             test_cases.append({
                 "id": f"TC-{i+1}",
@@ -345,14 +260,5 @@ async def process(files: list[UploadFile] = File(...)):
         }
 
     except Exception as e:
+        print("❌ PROCESS ERROR:", str(e))
         raise HTTPException(status_code=500, detail=str(e))
-    
-from fastapi.middleware.cors import CORSMiddleware
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)

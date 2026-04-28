@@ -1,4 +1,4 @@
-const API_URL = "/api/full-analysis";
+const API_URL = window.location.origin + "/api/full-analysis";
 
 async function processFiles() {
 
@@ -11,7 +11,7 @@ async function processFiles() {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        doc_id: 1   // ⚠️ make sure this exists in your DB
+        doc_id: 1
       })
     });
 
@@ -22,22 +22,28 @@ async function processFiles() {
 
     const data = await res.json();
 
-    console.log("API RESPONSE:", data);
+    // DEBUG
+    console.log("FULL BACKEND RESPONSE:", data);
 
     document.getElementById("status").innerText = "Done ✅";
 
-    // Metrics
+    // SAFE UI UPDATES (FIXED)
+
     document.getElementById("reqCount").innerText =
       "📌 Requirements: " + (data.requirements?.length || 0);
 
     document.getElementById("featureCount").innerText =
-      "✨ Features: " + (data.features?.length || 0);
+      "✨ Features: " + (
+        data.features?.length ||
+        data.features_extracted?.length ||
+        0
+      );
 
     document.getElementById("clusterCount").innerText =
       "🧠 Clusters: " + (data.fpr?.clusters?.length || 0);
 
     document.getElementById("testCount").innerText =
-      "🧪 Test Cases: 0"; // not returned by backend
+      "🧪 Test Cases: " + (data.test_cases?.length || 0);
 
     renderOutput(data);
 
@@ -47,6 +53,7 @@ async function processFiles() {
   }
 }
 
+// RENDER FUNCTION (UNCHANGED)
 function renderOutput(data) {
   const output = document.getElementById("output");
   output.innerHTML = "";
@@ -57,7 +64,7 @@ function renderOutput(data) {
     output.innerHTML += `<div class="section">${r}</div>`;
   });
 
-  // Sections (BONUS: your backend actually returns this)
+  // Sections
   if (data.sections) {
     output.innerHTML += `<h2>📄 Sections</h2>`;
     Object.entries(data.sections).forEach(([key, value]) => {
