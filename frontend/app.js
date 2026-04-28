@@ -1,4 +1,4 @@
-const API_URL = window.location.origin + "/api/full-analysis";
+const API_URL = "/api/full-analysis";
 
 async function processFiles() {
 

@@ -262,3 +262,7 @@ async def process(files: list[UploadFile] = File(...)):
     except Exception as e:
         print("❌ PROCESS ERROR:", str(e))
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# REQUIRED for Vercel FastAPI detection
+handler = app
