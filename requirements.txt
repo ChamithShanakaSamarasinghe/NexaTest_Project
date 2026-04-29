@@ -1,8 +1,7 @@
 fastapi
 uvicorn
 mangum
-python-multipart
 numpy
-python-docx
+python-multipart
 PyPDF2
-pdfplumber
+python-docx

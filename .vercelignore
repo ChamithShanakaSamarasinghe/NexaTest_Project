@@ -1,13 +1,8 @@
 venv/
-.venv/
 __pycache__/
-uploads/
-data/
-results/
+*.pyc
 analysis/
 cloned_tasks/
-srs_docs/
-db.sqlite3
-*.pdf
-*.docx
-*.pyc
+data/
+notebooks/
+tests/

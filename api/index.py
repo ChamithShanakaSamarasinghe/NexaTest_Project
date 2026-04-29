@@ -4,12 +4,11 @@ from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from mangum import Mangum
 import sqlite3
-import sys
 from pathlib import Path
-import json
 import numpy as np
 import shutil
 import os
+import sys
 
 # FIX NUMPY ISSUE
 np.float = float
@@ -21,45 +20,8 @@ SRC_PATH = BASE_PATH / "src"
 sys.path.insert(0, str(BASE_PATH))
 sys.path.insert(0, str(SRC_PATH))
 
-# SAFE IMPORT FLAGS (IMPORTANT FIX)
-run_fpr_pipeline = None
-segment_sections = None
-extract_requirements = None
+# GLOBALS (NO IMPORT CRASHES)
 orc = None
-
-# Lazy load functions ONLY when needed
-def load_fpr():
-    global run_fpr_pipeline
-    if run_fpr_pipeline is None:
-        try:
-            from src.fpr.fpr_pipeline import run_fpr_pipeline as _run
-            run_fpr_pipeline = _run
-        except:
-            run_fpr_pipeline = None
-
-def load_segments():
-    global segment_sections, extract_requirements
-    if segment_sections is None or extract_requirements is None:
-        try:
-            from src.segment_sections import segment_sections as ss
-            from src.segment_requirements import extract_requirements as er
-            segment_sections = ss
-            extract_requirements = er
-        except:
-            segment_sections = lambda x: {"section": x}
-            extract_requirements = lambda x: [x]
-
-def load_orchestrator():
-    global orc
-    if orc is None:
-        try:
-            from app.services.parsing.orchestrator import Orchestrator
-            orc = Orchestrator()
-        except:
-            orc = None
-
-# DATABASE
-DB_FILE = str(BASE_PATH / "db.sqlite3")
 
 # FASTAPI APP
 app = FastAPI(title="🚀 SRS Automation API")
@@ -72,7 +34,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# DB UTILS
+# DB
+DB_FILE = str(BASE_PATH / "db.sqlite3")
+
 def query_db(query: str, params: tuple = ()):
     conn = sqlite3.connect(DB_FILE)
     conn.row_factory = sqlite3.Row
@@ -82,6 +46,7 @@ def query_db(query: str, params: tuple = ()):
     conn.close()
     return [dict(r) for r in rows]
 
+# Safe json
 def convert_json_safe(obj):
     if isinstance(obj, dict):
         return {str(k): convert_json_safe(v) for k, v in obj.items()}
@@ -93,19 +58,53 @@ def convert_json_safe(obj):
         return float(obj)
     return obj
 
-# Root
+# Lazy Load Functions
+def load_orchestrator():
+    global orc
+    if orc is None:
+        try:
+            from app.services.parsing.orchestrator import Orchestrator
+            orc = Orchestrator()
+        except Exception as e:
+            print("⚠️ Orchestrator disabled:", str(e))
+            orc = None
+
+def load_segments():
+    try:
+        from src.segment_sections import segment_sections
+        from src.segment_requirements import extract_requirements
+        return segment_sections, extract_requirements
+    except Exception as e:
+        print("⚠️ Segment fallback:", str(e))
+        return (
+            lambda x: {"section": x},
+            lambda x: [x]
+        )
+
+def safe_run_fpr_pipeline(requirements):
+    try:
+        from src.fpr.fpr_pipeline import run_fpr_pipeline
+        return run_fpr_pipeline(requirements)
+    except Exception as e:
+        print("⚠️ FPR disabled:", str(e))
+        return {
+            "clusters": [],
+            "keywords": {},
+            "metrics": {}
+        }
+
+# Routes
 @app.get("/")
 def home():
     return {"message": "✅ NexaTest Backend Running"}
 
-# Full Service
 @app.post("/full-analysis")
 def full_analysis(file_path: str = None, doc_id: int = None):
     try:
         print("🔥 FULL ANALYSIS HIT")
 
         load_orchestrator()
-        load_segments()
+        segment_sections, extract_requirements = load_segments()
 
         full_text = ""
 
@@ -130,8 +129,8 @@ def full_analysis(file_path: str = None, doc_id: int = None):
             }
 
         sections = segment_sections(full_text)
-        requirements = []
 
+        requirements = []
         for sec in sections.values():
             requirements.extend(extract_requirements(sec))
 
@@ -149,25 +148,8 @@ def full_analysis(file_path: str = None, doc_id: int = None):
             for i, r in enumerate(requirements[:5])
         ]
 
-        # SAFE FPR
-        fpr_result = {
-            "clusters": [],
-            "keywords": {},
-            "metrics": {}
-        }
-
-        load_fpr()
-
-        if run_fpr_pipeline and requirements:
-            try:
-                res = run_fpr_pipeline(requirements)
-                fpr_result = {
-                    "clusters": res.get("clusters", []),
-                    "keywords": convert_json_safe(res.get("keywords", {})),
-                    "metrics": convert_json_safe(res.get("metrics", {}))
-                }
-            except Exception as e:
-                print("⚠️ FPR FAILED:", str(e))
+        # Safe FPR call
+        fpr_result = safe_run_fpr_pipeline(requirements)
 
         return {
             "sections": sections,
@@ -181,7 +163,7 @@ def full_analysis(file_path: str = None, doc_id: int = None):
         print("❌ ERROR:", str(e))
         raise HTTPException(500, str(e))
 
-# FILE UPLOAD
+# File Upload
 UPLOAD_DIR = "/tmp"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
@@ -235,5 +217,5 @@ async def process(files: list[UploadFile] = File(...)):
     except Exception as e:
         raise HTTPException(500, str(e))
 
-# VERCEL HANDLER
+# Vercel Handler
 handler = Mangum(app)
