@@ -1,9 +1,11 @@
-import pdfplumber
 import os
 
 OUTPUT_PATH = "data/output/extracted_text.txt"
 
 def extract_text_from_pdf(pdf_path):
+    # 🔥 Lazy import (FIXES VERCEL CRASH)
+    import pdfplumber
+
     text = ""
 
     with pdfplumber.open(pdf_path) as pdf:
@@ -33,5 +35,3 @@ if __name__ == "__main__":
     print("Saved to:", OUTPUT_PATH)
     print("\n--- TEXT PREVIEW ---\n")
     print(text[:1000])
-
-#This code is the same code I am using from SRS segmentation task in sprint 1
