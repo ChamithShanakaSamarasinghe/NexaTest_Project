@@ -1,13 +1,8 @@
-streamlit
 fastapi
 uvicorn
-python-docx
-python-pptx
-pillow
-PyPDF2
-numpy
-requests
 mangum
-scikit-learn
 python-multipart
+numpy
+python-docx
+PyPDF2
 pdfplumber
