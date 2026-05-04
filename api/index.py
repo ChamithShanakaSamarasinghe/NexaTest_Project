@@ -1,7 +1,6 @@
-# File: api/index.py
-
 from fastapi import FastAPI, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 from mangum import Mangum
 import sqlite3
 from pathlib import Path
@@ -10,7 +9,7 @@ import shutil
 import os
 import sys
 
-# FIX NUMPY ISSUE
+# Fixing NUMPY issue
 np.float = float
 
 # Path Setup
@@ -20,11 +19,10 @@ SRC_PATH = BASE_PATH / "src"
 sys.path.insert(0, str(BASE_PATH))
 sys.path.insert(0, str(SRC_PATH))
 
-# GLOBALS (NO IMPORT CRASHES)
 orc = None
 
 # FASTAPI APP
-app = FastAPI(title="🚀 SRS Automation API")
+app = FastAPI(title="NexaTest API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -34,9 +32,16 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# DB
 DB_FILE = str(BASE_PATH / "db.sqlite3")
 
+
+# Request Model
+class AnalysisRequest(BaseModel):
+    doc_id: int = None
+    file_path: str = None
+
+
+# Database
 def query_db(query: str, params: tuple = ()):
     conn = sqlite3.connect(DB_FILE)
     conn.row_factory = sqlite3.Row
@@ -46,19 +51,8 @@ def query_db(query: str, params: tuple = ()):
     conn.close()
     return [dict(r) for r in rows]
 
-# Safe json
-def convert_json_safe(obj):
-    if isinstance(obj, dict):
-        return {str(k): convert_json_safe(v) for k, v in obj.items()}
-    if isinstance(obj, list):
-        return [convert_json_safe(i) for i in obj]
-    if isinstance(obj, (np.integer,)):
-        return int(obj)
-    if isinstance(obj, (np.floating,)):
-        return float(obj)
-    return obj
 
-# Lazy Load Functions
+# Load Helpers
 def load_orchestrator():
     global orc
     if orc is None:
@@ -66,8 +60,9 @@ def load_orchestrator():
             from app.services.parsing.orchestrator import Orchestrator
             orc = Orchestrator()
         except Exception as e:
-            print("⚠️ Orchestrator disabled:", str(e))
+            print("Orchestrator disabled:", str(e))
             orc = None
+
 
 def load_segments():
     try:
@@ -75,49 +70,58 @@ def load_segments():
         from src.segment_requirements import extract_requirements
         return segment_sections, extract_requirements
     except Exception as e:
-        print("⚠️ Segment fallback:", str(e))
+        print("Segment fallback:", str(e))
         return (
             lambda x: {"section": x},
             lambda x: [x]
         )
+
 
 def safe_run_fpr_pipeline(requirements):
     try:
         from src.fpr.fpr_pipeline import run_fpr_pipeline
         return run_fpr_pipeline(requirements)
     except Exception as e:
-        print("⚠️ FPR disabled:", str(e))
+        print("FPR disabled:", str(e))
         return {
             "clusters": [],
             "keywords": {},
             "metrics": {}
         }
 
-# Routes
-@app.get("/")
-def home():
-    return {"message": "✅ NexaTest Backend Running"}
 
-@app.post("/full-analysis")
-def full_analysis(file_path: str = None, doc_id: int = None):
+# Routes
+
+@app.get("/api")
+def home():
+    return {"message": "NexaTest Backend Running"}
+
+
+@app.post("/api/full-analysis")
+def full_analysis(request: AnalysisRequest):
     try:
-        print("🔥 FULL ANALYSIS HIT")
+        print("FULL ANALYSIS HIT")
 
         load_orchestrator()
         segment_sections, extract_requirements = load_segments()
 
         full_text = ""
 
-        if orc and file_path:
-            result = orc.process(job_id="JOB-002", file_path=file_path)
+        if orc and request.file_path:
+            result = orc.process(
+                job_id="JOB-002",
+                file_path=request.file_path
+            )
             full_text = result["content"].get("text", "")
 
-        elif doc_id:
+        elif request.doc_id:
             reqs = query_db(
                 "SELECT requirement_text FROM requirements WHERE document_id=?",
-                (doc_id,)
+                (request.doc_id,)
             )
-            full_text = "\n".join([r["requirement_text"] for r in reqs])
+            full_text = "\n".join(
+                [r["requirement_text"] for r in reqs]
+            )
 
         if not full_text:
             return {
@@ -125,7 +129,11 @@ def full_analysis(file_path: str = None, doc_id: int = None):
                 "requirements": [],
                 "features": [],
                 "test_cases": [],
-                "fpr": {"clusters": [], "keywords": {}, "metrics": {}}
+                "fpr": {
+                    "clusters": [],
+                    "keywords": {},
+                    "metrics": {}
+                }
             }
 
         sections = segment_sections(full_text)
@@ -148,7 +156,6 @@ def full_analysis(file_path: str = None, doc_id: int = None):
             for i, r in enumerate(requirements[:5])
         ]
 
-        # Safe FPR call
         fpr_result = safe_run_fpr_pipeline(requirements)
 
         return {
@@ -160,17 +167,22 @@ def full_analysis(file_path: str = None, doc_id: int = None):
         }
 
     except Exception as e:
-        print("❌ ERROR:", str(e))
-        raise HTTPException(500, str(e))
+        print("ERROR:", str(e))
+        raise HTTPException(status_code=500, detail=str(e))
 
-# File Upload
+
+# File Proccessing
+
 UPLOAD_DIR = "/tmp"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
-@app.post("/process")
+
+@app.post("/api/process")
 async def process(files: list[UploadFile] = File(...)):
     try:
-        requirements, features, test_cases = [], [], []
+        requirements = []
+        features = []
+        test_cases = []
 
         for file in files:
             path = os.path.join(UPLOAD_DIR, file.filename)
@@ -181,7 +193,12 @@ async def process(files: list[UploadFile] = File(...)):
             text = ""
 
             if file.filename.endswith(".txt"):
-                text = open(path, "r", encoding="utf-8", errors="ignore").read()
+                text = open(
+                    path,
+                    "r",
+                    encoding="utf-8",
+                    errors="ignore"
+                ).read()
 
             elif file.filename.endswith(".docx"):
                 from docx import Document
@@ -191,13 +208,17 @@ async def process(files: list[UploadFile] = File(...)):
             elif file.filename.endswith(".pdf"):
                 import PyPDF2
                 reader = PyPDF2.PdfReader(path)
-                text = "\n".join([p.extract_text() or "" for p in reader.pages])
+                text = "\n".join(
+                    [p.extract_text() or "" for p in reader.pages]
+                )
 
             for s in text.split("."):
                 s = s.strip()
+
                 if len(s) > 10:
                     if any(w in s.lower() for w in ["shall", "must", "should"]):
                         requirements.append(s)
+
                     if any(w in s.lower() for w in ["system", "feature", "module"]):
                         features.append(s)
 
@@ -215,7 +236,8 @@ async def process(files: list[UploadFile] = File(...)):
         }
 
     except Exception as e:
-        raise HTTPException(500, str(e))
+        raise HTTPException(status_code=500, detail=str(e))
+
 
 # Vercel Handler
 handler = Mangum(app)
