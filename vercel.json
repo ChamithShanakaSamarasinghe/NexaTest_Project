@@ -12,7 +12,14 @@
       "dest": "api/index.py"
     },
     {
-      "src": "^(?!/api).*",
+      "src": "^/api$",
+      "dest": "api/index.py"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
       "dest": "/index.html"
     }
   ]
